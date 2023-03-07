@@ -1,0 +1,21 @@
+{
+  "files.associations": {
+    "iostream": "cpp",
+    "xutility": "cpp",
+    "xstring": "cpp",
+    "ostream": "cpp",
+    "stack": "cpp",
+    "queue": "cpp",
+    "deque": "cpp",
+    "format": "cpp",
+    "list": "cpp",
+    "vector": "cpp",
+    "algorithm": "cpp",
+    "utility": "cpp",
+    "random": "cpp",
+    "ios": "cpp",
+    "chrono": "cpp",
+    "span": "cpp",
+    "unordered_set": "cpp"
+  }
+}

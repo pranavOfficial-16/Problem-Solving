@@ -1,0 +1,1 @@
+{"name":"Local: TrimSpaces","url":"d:\\Coding\\C++\\CODING NINJA\\Introduction to C++\\Milestone 2\\TrimSpaces.cpp","tests":[{"id":1667844082637,"input":"abc def g hi","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Coding\\C++\\CODING NINJA\\Introduction to C++\\Milestone 2\\TrimSpaces.cpp","group":"local","local":true}

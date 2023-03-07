@@ -1,0 +1,1 @@
+{"name":"Local: print_ith_node","url":"d:\\Coding\\C++\\CodingNinja\\Linked_list\\print_ith_node.cpp","tests":[{"id":1672071884616,"input":"3 4 5 2 6 1 9 -1\n0","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Coding\\C++\\CodingNinja\\Linked_list\\print_ith_node.cpp","group":"local","local":true}

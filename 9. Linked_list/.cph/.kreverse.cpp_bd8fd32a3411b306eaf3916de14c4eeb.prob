@@ -1,0 +1,1 @@
+{"name":"Local: kreverse","url":"d:\\Coding\\C++\\CODING NINJA\\Linked_list\\kreverse.cpp","tests":[{"id":1672485598627,"input":"1 2 3 4 5 6 7 8 9 10 -1\n4","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Coding\\C++\\CODING NINJA\\Linked_list\\kreverse.cpp","group":"local","local":true}

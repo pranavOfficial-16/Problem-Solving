@@ -1,0 +1,1 @@
+{"name":"Local: arrayRotateCheck","url":"d:\\Coding\\C++\\CodingNinja\\Arrays\\arrayRotateCheck.cpp","tests":[{"id":1671617011340,"input":"5\n3 6 8 9 10","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Coding\\C++\\CodingNinja\\Arrays\\arrayRotateCheck.cpp","group":"local","local":true}

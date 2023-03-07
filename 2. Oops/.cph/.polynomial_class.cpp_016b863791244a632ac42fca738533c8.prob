@@ -1,0 +1,1 @@
+{"name":"Local: polynomial_class","url":"d:\\Coding\\C++\\CodingNinja\\Oops\\polynomial_class.cpp","tests":[{"id":1671908275528,"input":"3\n1 3 5\n1 2 -4\n4\n0 1 2 3\n4 2 -3 1\n1","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Coding\\C++\\CodingNinja\\Oops\\polynomial_class.cpp","group":"local","local":true}

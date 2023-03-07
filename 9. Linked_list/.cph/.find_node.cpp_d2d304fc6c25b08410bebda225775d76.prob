@@ -1,0 +1,1 @@
+{"name":"Local: find_node","url":"d:\\Coding\\C++\\CodingNinja\\Linked_list\\find_node.cpp","tests":[{"id":1672157143652,"input":"3 4 5 2 6 1 9 -1\n2","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Coding\\C++\\CodingNinja\\Linked_list\\find_node.cpp","group":"local","local":true}

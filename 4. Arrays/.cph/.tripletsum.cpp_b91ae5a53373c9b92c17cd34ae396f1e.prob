@@ -1,0 +1,1 @@
+{"name":"Local: tripletsum","url":"d:\\Coding\\C++\\CodingNinja\\Arrays\\tripletsum.cpp","tests":[{"id":1671554891911,"input":"11\n6 1 6 5 3 2 5 0 5 6 0 \n5","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Coding\\C++\\CodingNinja\\Arrays\\tripletsum.cpp","group":"local","local":true}

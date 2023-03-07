@@ -1,0 +1,1 @@
+{"name":"Local: StringPermutation","url":"d:\\Coding\\C++\\CODING NINJA\\Introduction to C++\\Milestone 2\\StringPermutation.cpp","tests":[{"id":1668104595432,"input":"abc\ncba","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Coding\\C++\\CODING NINJA\\Introduction to C++\\Milestone 2\\StringPermutation.cpp","group":"local","local":true}

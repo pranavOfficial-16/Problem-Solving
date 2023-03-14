@@ -25,13 +25,12 @@ int main()
     cout << "\nOutput of crbegin and crend : ";
     for (auto ir = v.crbegin(); ir != v.crend(); ++ir)
         cout << *ir << " ";
-    return 0;
     // 2d vectors
     vector<vector<int>> vect{
         {1, 2, 3},
         {4, 5, 6},
         {7, 8, 9}};
-    //method-1
+    // method-1
     for (int i = 0; i < vect.size(); i++)
     {
         for (int j = 0; j < vect[i].size(); j++)
@@ -40,7 +39,7 @@ int main()
         }
         cout << endl;
     }
-    //method-2
+    // method-2
     for (vector<int> vect1D : vect)
     {
         for (int x : vect1D)
@@ -49,9 +48,9 @@ int main()
         }
         cout << endl;
     }
-    //for declaring 2d vector
-    int n=3;
-    int m=4;
+    // for declaring 2d vector
+    int n = 3;
+    int m = 4;
     vector<vector<int>> vec(n, vector<int>(m));
     for (int i = 0; i < n; i++)
     {

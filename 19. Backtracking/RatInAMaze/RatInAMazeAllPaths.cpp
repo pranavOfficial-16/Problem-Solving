@@ -47,7 +47,7 @@ void solve(vector<vector<int>> &arr, int n, vector<vector<int>> visited, vector<
 vector<vector<int>> ratInAMaze(vector<vector<int>> arr, int n)
 {
     vector<vector<int>> ans;
-    if (arr[0][0] == 0)
+    if (arr[0][0] == 0 || arr[n - 1][n - 1] == 0)
         return ans;
     vector<vector<int>> visited(n, vector<int>(n, 0));
     solve(arr, n, visited, ans, 0, 0);

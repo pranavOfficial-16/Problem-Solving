@@ -546,29 +546,61 @@
            ***
             *
 */
-#include <iostream>
-using namespace std;
-int main()
-{
-    int n;
-    cin >> n;
-    // upperhalf
-    for (int i = 0; i <= n / 2; i++)
-    {
-        for (int j = n / 2; j >= i + 1; j--)
-            cout << " ";
-        for (int j = 0; j <= i * 2; j++)
-            cout << "*";
-        cout << endl;
-    }
-    // lower half
-    for (int i = n / 2; i >= 0; i--)
-    {
-        for (int k = n / 2; k >= i; k--)
-            cout << " ";
-        for (int j = 0; j < i * 2 - 1; j++)
-            cout << "*";
-        cout << endl;
-    }
-    return 0;
-}
+// #include <iostream>
+// using namespace std;
+// int main()
+// {
+//     int n;
+//     cin >> n;
+//     // upperhalf
+//     for (int i = 0; i <= n / 2; i++)
+//     {
+//         for (int j = n / 2; j >= i + 1; j--)
+//             cout << " ";
+//         for (int j = 0; j <= i * 2; j++)
+//             cout << "*";
+//         cout << endl;
+//     }
+//     // lower half
+//     for (int i = n / 2; i >= 0; i--)
+//     {
+//         for (int k = n / 2; k >= i; k--)
+//             cout << " ";
+//         for (int j = 0; j < i * 2 - 1; j++)
+//             cout << "*";
+//         cout << endl;
+//     }
+//     return 0;
+// }
+
+/*
+    4 4 4 4 4 4 4
+    4 3 3 3 3 3 4
+    4 3 2 2 2 3 4
+    4 3 2 1 2 3 4
+    4 3 2 2 2 3 4
+    4 3 3 3 3 3 4
+    4 4 4 4 4 4 4
+*/
+// #include<bits/stdc++.h>
+// using namespace std;
+// void printSquare(int n)
+// {
+//     int size = 2 * n - 1;
+//     for (int i = 0; i < size; i++)
+//     {
+//         for (int j = 0; j < size; j++)
+//         {
+//             int formula = n - min(min(i, j), min((size - 1) - i, (size - 1) - j));
+//             cout << formula << " ";
+//         }
+//         cout << endl;
+//     }
+// }
+// int main()
+// {
+//     int n;
+//     cin>>n;
+//     printSquare(n);
+//     return 0;
+// }

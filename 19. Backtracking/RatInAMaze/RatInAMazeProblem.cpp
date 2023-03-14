@@ -34,7 +34,7 @@ void solve(vector<vector<int>> &arr, int n, vector<string> &ans,
 vector<string> searchMaze(vector<vector<int>> arr, int n)
 {
     vector<string> ans;
-    if (arr[0][0] == 0)
+    if (arr[0][0] == 0 || arr[n - 1][n - 1] == 0)
         return ans;
     vector<vector<int>> visited(n, vector<int>(n, 0));
     string path = "";

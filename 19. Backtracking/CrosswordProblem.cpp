@@ -1,129 +1,170 @@
 #include <bits/stdc++.h>
 using namespace std;
-bool canPlaceWordHorizontally(vector<string> board, string currentWord, int row, int col)
+bool canPlaceWordHorizontally(vector<string> &board, string currentWord, int row, int col)
 {
     if (board.size() - col < currentWord.size())
         return false;
-    for (int j = 0; j < currentWord.size(); j++)
+    int i = 0;
+    int j = col;
+    while (i < currentWord.size())
     {
-        if (board[row][j] != '-' && board[row][j] != currentWord[j])
+        if (board[row][j] != '-' && board[row][j] != currentWord[i])
             return false;
+        i++;
+        j++;
     }
     return true;
 }
-vector<bool> placeWordHorizontally(vector<string> board, string currentWord, int row, int col)
-{
-    vector<bool> visited;
-    for (int j = 0; j < currentWord.size(); j++)
-    {
-        if (board[row][j] == '-')
-        {
-            board[row][j] = currentWord[j];
-            visited[j] = true;
-        }
-    }
-    return visited;
-}
-void unplaceWordHorizontally(vector<string> board, string currentWord, vector<bool> visited, int row, int col)
-{
-    for (int j = 0; j < currentWord.size(); j++)
-    {
-        if (visited[j] == true)
-            board[row][j] = '-';
-    }
-}
-bool canPlaceWordVertically(vector<string> board, string currentWord, int row, int col)
+bool canPlaceWordVertically(vector<string> &board, string currentWord, int row, int col)
 {
     if (board.size() - row < currentWord.size())
         return false;
-    for (int i = 0; i < currentWord.size(); i++)
+    int i = row;
+    int j = 0;
+    while (j < currentWord.size())
     {
-        if (board[i][col] != '-' && board[i][col] != currentWord[i])
+        if (board[i][col] != '-' && board[i][col] != currentWord[j])
             return false;
+        i++;
+        j++;
     }
     return true;
 }
-vector<bool> placeWordVertically(vector<string> board, string currentWord, int row, int col)
+void placeWordHorizontally(vector<string> &board, string currentWord, vector<bool> &visited, int row, int col)
 {
-    vector<bool> visited;
-    for (int i = 0; i < currentWord.size(); i++)
+    int i = 0;
+    int j = col;
+    while (i < currentWord.size())
     {
-        if (board[i][col] == '-')
+        if (board[row][j] != '+')
         {
-            board[i][col] = currentWord[i];
-            visited[i] = true;
+            if (board[row][j] == currentWord[i])
+                visited[i] = false;
+            else
+                visited[i] = true;
+            board[row][j] = currentWord[i];
         }
+        i++;
+        j++;
     }
-    return visited;
 }
-void unplaceWordVertically(vector<string> board, string currentWord, vector<bool> visited, int row, int col)
+void placeWordVertically(vector<string> &board, string currentWord, vector<bool> &visited, int row, int col)
 {
-    for (int i = 0; i < currentWord.size(); i++)
+    int i = row;
+    int j = 0;
+    while (j < currentWord.size())
+    {
+        if (board[i][col] != '+')
+        {
+            if (board[i][col] == currentWord[j])
+                visited[j] = false;
+            else
+                visited[j] = true;
+            board[i][col] = currentWord[j];
+        }
+        i++;
+        j++;
+    }
+}
+void unplaceWordHorizontally(vector<string> &board, string currentWord, vector<bool> &visited, int row, int col)
+{
+    int i = 0;
+    int j = col;
+    while (i < currentWord.size())
     {
         if (visited[i] == true)
-            board[i][col] = '-';
+            board[row][j] = '-';
+        i++;
+        j++;
     }
 }
-void addSolution(vector<string> board, vector<string> &ans)
+void unplaceWordVertically(vector<string> &board, string currentWord, vector<bool> &visited, int row, int col)
+{
+    int i = row;
+    int j = 0;
+    while (j < currentWord.size())
+    {
+        if (visited[j] == true)
+            board[i][col] = '-';
+        i++;
+        j++;
+    }
+}
+void printSolution(vector<string> &board)
 {
     for (int i = 0; i < board.size(); i++)
     {
-        string s = "";
-        for (int j = 0; board.size(); j++)
+        for (int j = 0; j < board[i].size(); j++)
         {
-            s += board[i][j];
+            cout << board[i][j];
         }
-        ans.push_back(s);
+        cout << endl;
     }
 }
-void solve(vector<string> board, vector<string> words, int index, vector<string> &ans)
+bool solve(vector<string> &board, vector<string> words, int index)
 {
     // base case
     if (index == words.size())
     {
-        addSolution(board, ans);
-        return;
+        printSolution(board);
+        return true;
     }
-    string currentWord = words[index];
+
     for (int i = 0; i < board.size(); i++)
     {
         for (int j = 0; j < board.size(); j++)
         {
-            if (board[i][j] == '-' || board[i][j] == currentWord[0])
+            if (board[i][j] == '-' || board[i][j] == words[index][0])
             {
+                vector<bool> visited(words.size(), false);
+
                 // check horizonally
-                if (canPlaceWordHorizontally(board, currentWord, i, j))
+                if (canPlaceWordHorizontally(board, words[index], i, j))
                 {
-                    vector<bool> visited = placeWordHorizontally(board, currentWord, i, j);
-                    solve(board, words, index + 1, ans);
-                    unplaceWordHorizontally(board, currentWord, visited, i, j);
+                    placeWordHorizontally(board, words[index], visited, i, j);
+                    // recursive call
+                    bool nextSolution = solve(board, words, index + 1);
+                    if (nextSolution)
+                        return true;
+                    else
+                    {
+                        // backtrack
+                        unplaceWordHorizontally(board, words[index], visited, i, j);
+                    }
                 }
 
                 // check Vertically
-                if (canPlaceWordVertically(board, currentWord, i, j))
+                if (canPlaceWordVertically(board, words[index], i, j))
                 {
-                    vector<bool> visited = placeWordVertically(board, currentWord, i, j);
-                    solve(board, words, index + 1, ans);
-                    unplaceWordVertically(board, currentWord, visited, i, j);
+                    placeWordVertically(board, words[index], visited, i, j);
+                    // recursive call
+                    bool nextSolution = solve(board, words, index + 1);
+                    if (nextSolution)
+                        return true;
+                    else
+                    {
+                        // backtrack
+                        unplaceWordVertically(board, words[index], visited, i, j);
+                    }
                 }
             }
         }
     }
+    return false;
 }
-vector<string> solveCrossword(vector<string> board, vector<string> words)
+void solveCrossword(vector<string> &board, vector<string> words)
 {
-    vector<string> ans;
     int index = 0;
-    solve(board, words, index, ans);
-    return ans;
+    bool ans = solve(board, words, index);
 }
+
 int main()
 {
     int n = 10;
     vector<string> board;
     for (int i = 0; i < n; i++)
     {
-        string s = "";
+        string s;
         cin >> s;
         board.push_back(s);
     }
@@ -142,14 +183,6 @@ int main()
         else
             s += wordlist[i];
     }
-    vector<string> ans = solveCrossword(board, words);
-    for (int i = 0; i < ans.size(); i++)
-    {
-        for (int j = 0; j < ans[i].size(); j++)
-        {
-            cout << ans[i][j];
-        }
-        cout << endl;
-    }
+    solveCrossword(board, words);
     return 0;
 }

@@ -1,9 +1,24 @@
 // vectors are inbuild dynamic array
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 int main()
 {
+    // dynamic
+    vector<int> *dynamic = new vector<int>();
+    // static
+    vector<int> v1;
+    v1.push_back(10);
+    v1.push_back(20);
+    v1.push_back(30);
+    v1.emplace_back(40);
+    /*
+        v[] we use for only get and update (not to insert)
+    */
+    cout << v1.at(1) << endl;
+    for (int i : v1)
+        cout << i << endl;
+    for (auto i : v1)
+        cout << i << endl;
     // static creation of vector
     vector<int> v;
     /*
@@ -60,4 +75,5 @@ int main()
         }
         cout << endl;
     }
+    return 0;
 }

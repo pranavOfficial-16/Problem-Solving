@@ -10,15 +10,17 @@ int linearSearch(int *arr, int n, int x)
     }
     return -1;
 }
-int main(){
-    int n,x;
-    cin>>n;
-    int arr[n];
-    for(int i=0;i<n;i++){
-        cin>>arr[i];
+int main()
+{
+    int n, x;
+    cin >> n;
+    int *arr = new int[n];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
     }
-    //Element to be searched
-    cin>>x;
-    cout<<linearSearch(arr,n,x);
+    // Element to be searched
+    cin >> x;
+    cout << linearSearch(arr, n, x);
     return 0;
 }

@@ -1,13 +1,12 @@
 /*
     Selection sort
-    (asc)
-    find the min element and swap it in begining and so on
-    (dec)
-    find the max element and swap it in begining and so on
+    (asc) -> find the min element and swap it in begining and so on
+    (dec) -> find the max element and swap it in begining and so on
 */
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-void selectionsort(int *a,int n){
+void selectionsort(int *a, int n)
+{
     int temp;
     for (int i = 0; i < n - 1; i++)
     {
@@ -26,7 +25,7 @@ int main()
 {
     int n;
     cin >> n;
-    int a[n];
+    int *a = new int[n];
     for (int i = 0; i < n; i++)
         cin >> a[i];
     selectionsort(a, n);

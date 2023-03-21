@@ -1,5 +1,4 @@
-// Merge sort using recursion with start and end index
-// Time complexity : 2T(n/2) + θ(n) (in recusion notation) same as O(nlogn)
+// Time complexity : O(nlogn)
 // Space Complexity : O(n)
 #include <iostream>
 using namespace std;
@@ -23,18 +22,22 @@ void merge(int *arr, int s, int e)
 
     // merge the sorted arrays
     int i = 0, j = 0, next = s;
-    while (i < len1 || j < len2)
+    while (i < len1 && j < len2)
     {
         if (first[i] < second[j])
             arr[next++] = first[i++];
         else
             arr[next++] = second[j++];
     }
+    while (i < len1)
+        arr[next++] = first[i++];
+    while (j < len2)
+        arr[next++] = second[j++];
 }
 void mergeSort(int *arr, int s, int e)
 {
     // base case
-    if (s >= e)
+    if (s == e)
         return;
     int mid = s + (e - s) / 2;
 

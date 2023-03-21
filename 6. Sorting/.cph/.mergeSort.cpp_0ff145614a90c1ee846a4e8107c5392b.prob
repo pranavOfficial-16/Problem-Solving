@@ -1,0 +1,1 @@
+{"name":"Local: mergeSort","url":"d:\\Coding\\LANGUAGES\\C++\\CODING NINJA\\6. Sorting\\mergeSort.cpp","tests":[{"id":1679426676835,"input":"6\n13 46 24 52 20 9","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Coding\\LANGUAGES\\C++\\CODING NINJA\\6. Sorting\\mergeSort.cpp","group":"local","local":true}

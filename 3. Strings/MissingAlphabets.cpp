@@ -1,5 +1,5 @@
 // print the missing alphabets from a given string
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 string missingChars(string str)
 {
@@ -21,7 +21,7 @@ string missingChars(string str)
 int main()
 {
     string str;
-    getline(cin,str);
+    getline(cin, str);
     cout << missingChars(str);
     return 0;
 }

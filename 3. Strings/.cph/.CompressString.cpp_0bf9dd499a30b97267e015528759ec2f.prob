@@ -1,0 +1,1 @@
+{"name":"Local: CompressString","url":"d:\\Coding\\LANGUAGES\\C++\\CODING NINJA\\3. Strings\\CompressString.cpp","tests":[{"id":1679399859415,"input":"aabbccde","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Coding\\LANGUAGES\\C++\\CODING NINJA\\3. Strings\\CompressString.cpp","group":"local","local":true}

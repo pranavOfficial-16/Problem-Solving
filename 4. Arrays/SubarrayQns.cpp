@@ -1,6 +1,29 @@
 // Subarray - continuous part of the array
 // no of subarrays of array with n elements - nc2+n = n(n+1)/2
 
+// print all the possible subarrays
+//   #include<iostream>
+//   using namespace std;
+//   int main()
+//   {
+//       int n;
+//       cin>>n;
+//       int a[n];
+//       for(int i=0;i<n;i++){
+//           cin>>a[i];
+//       }
+//       for(int i=0;i<n;i++){
+//           for(int j=i;j<n;j++){
+//               for(int k=i;k<=j;k++){
+//                   cout<<a[k]<<" ";
+//               }
+//               cout<<endl;
+//           }
+//           cout<<endl;
+//       }
+//       return 0;
+//   }
+
 // sum of all sub arrays
 //  #include <iostream>
 //  using namespace std;
@@ -127,29 +150,6 @@
 //     }
 //     return 0;
 // }
-
-// print all the possible subarrays
-//   #include<iostream>
-//   using namespace std;
-//   int main()
-//   {
-//       int n;
-//       cin>>n;
-//       int a[n];
-//       for(int i=0;i<n;i++){
-//           cin>>a[i];
-//       }
-//       for(int i=0;i<n;i++){
-//           for(int j=i;j<n;j++){
-//               for(int k=i;k<=j;k++){
-//                   cout<<a[k]<<" ";
-//               }
-//               cout<<endl;
-//           }
-//           cout<<endl;
-//       }
-//       return 0;
-//   }
 
 // print the subarray which has max sum
 //  #include <iostream>

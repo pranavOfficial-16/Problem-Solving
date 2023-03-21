@@ -3,7 +3,6 @@ using namespace std;
 int main()
 {
     unordered_map<string, int> ourmap;
-
     // insert
     pair<string, int> p("abc", 1);
     ourmap.insert(p);

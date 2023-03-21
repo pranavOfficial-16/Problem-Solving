@@ -1,4 +1,3 @@
-// Quick sort using recursion with start and end index
 // Time complexity : O(n²)
 // Space Complexity : O(n)
 #include <iostream>
@@ -21,7 +20,7 @@ int partition(int *arr, int s, int e)
     int i = s, j = e;
     while (i < pivotIndex && j > pivotIndex)
     {
-        while (arr[i] <= pivot)
+        while (arr[i] < pivot)
             i++;
         while (arr[j] > pivot)
             j--;
@@ -35,7 +34,6 @@ void quicksort(int *arr, int s, int e)
     // base case
     if (s >= e)
         return;
-
     // partition
     int p = partition(arr, s, e);
 

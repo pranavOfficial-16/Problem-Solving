@@ -5,31 +5,30 @@
 */
 #include <bits/stdc++.h>
 using namespace std;
-void selectionsort(int *a, int n)
+void selectionsort(int arr[], int n)
 {
-    int temp;
-    for (int i = 0; i < n - 1; i++)
+    for (int i = 0; i <= n - 2; i++)
     {
-        for (int j = i + 1; j < n; j++)
+        int mini = i;
+        for (int j = i; j <= n - 1; j++)
         {
-            if (a[j] < a[i])
-            {
-                temp = a[j];
-                a[j] = a[i];
-                a[i] = temp;
-            }
+            if (arr[j] < arr[mini])
+                mini = j;
         }
+        int temp = arr[mini];
+        arr[mini] = arr[i];
+        arr[i] = temp;
     }
 }
 int main()
 {
     int n;
     cin >> n;
-    int *a = new int[n];
+    int *arr = new int[n];
     for (int i = 0; i < n; i++)
-        cin >> a[i];
-    selectionsort(a, n);
+        cin >> arr[i];
+    selectionsort(arr, n);
     for (int i = 0; i < n; i++)
-        cout << a[i] << " ";
+        cout << arr[i] << " ";
     return 0;
 }

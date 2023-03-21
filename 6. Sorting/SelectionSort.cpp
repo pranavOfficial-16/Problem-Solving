@@ -1,7 +1,7 @@
 /*
-    Selection sort
-    (asc) -> find the min element and swap it in begining and so on
-    (dec) -> find the max element and swap it in begining and so on
+    TC -> worst - O(N^2)  best - O(N^2)
+    Selection sort -> find the min element and swap it in begining and so on (asc)
+    Selection sort -> find the max element and swap it in begining and so on (dec)
 */
 #include <bits/stdc++.h>
 using namespace std;

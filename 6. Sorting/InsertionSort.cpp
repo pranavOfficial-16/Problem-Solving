@@ -1,34 +1,32 @@
 /*
-    Insertion sort
-    (asc)
-    insert an element from an unsorted array
-    to its correct position in sorted array
+    TC -> worst - O(N^2)  best - O(N)
+    Insertion sort -> Takes an element and place it in its correct order (asc)
 */
 #include <iostream>
 using namespace std;
-void insertionSort(int *a, int n)
+void insertionSort(int arr[], int n)
 {
-    for (int i = 1; i < n; i++)
+    for (int i = 0; i <= n - 1; i++)
     {
-        int current = a[i];
-        int j = i - 1;
-        while (a[j] > current && j >= 0)
+        int j = i;
+        while (j > 0 && arr[j - 1] > arr[j])
         {
-            a[j + 1] = a[j];
+            int temp = arr[j - 1];
+            arr[j - 1] = arr[j];
+            arr[j] = temp;
             j--;
         }
-        a[j + 1] = current;
     }
 }
 int main()
 {
     int n;
     cin >> n;
-    int a[n];
+    int *arr = new int[n];
     for (int i = 0; i < n; i++)
-        cin >> a[i];
-    insertionSort(a, n);
+        cin >> arr[i];
+    insertionSort(arr, n);
     for (int i = 0; i < n; i++)
-        cout << a[i] << " ";
+        cout << arr[i] << " ";
     return 0;
 }

@@ -1,36 +1,38 @@
 /*
-    Bubble sort
-    Reapetedly swap two adj elements if they are in wrong order
-    L>R = wrong order (asc)
-    L<R = wrong order (dec)
+    TC -> worst - O(N^2)  best - O(N)
+    Bubble sort -> pushes the max to the last by adjacent swaps (asc)
+    Bubble sort -> pushes the min to the last by adjacent swaps (des)
 */
 #include <iostream>
 using namespace std;
-void bubbleSort(int *a, int n)
+void bubbleSort(int arr[], int n)
 {
-    int temp;
-    for (int i = 0; i < n - 1; i++)
+    for (int i = n - 1; i >= 0; i--)
     {
-        for (int j = 0; j < n - i - 1; j++)
+        int didswap = 0;
+        for (int j = 0; j <= i - 1; j++)
         {
-            if (a[j] > a[j + 1])
+            if (arr[j] > arr[j + 1])
             {
-                temp = a[j + 1];
-                a[j + 1] = a[j];
-                a[j] = temp;
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                didswap = 1;
             }
         }
+        if(didswap == 0)
+            break;
     }
 }
 int main()
 {
     int n;
     cin >> n;
-    int *a = new int[n];
+    int *arr = new int[n];
     for (int i = 0; i < n; i++)
-    cin >> a[i];
-    bubbleSort(a,n);
+        cin >> arr[i];
+    bubbleSort(arr, n);
     for (int i = 0; i < n; i++)
-    cout << a[i] << " ";
+        cout << arr[i] << " ";
     return 0;
 }

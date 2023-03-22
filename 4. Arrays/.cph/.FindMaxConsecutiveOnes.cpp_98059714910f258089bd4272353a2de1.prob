@@ -1,0 +1,1 @@
+{"name":"Local: FindMaxConsecutiveOnes","url":"d:\\Coding\\LANGUAGES\\C++\\CODING NINJA\\4. Arrays\\FindMaxConsecutiveOnes.cpp","tests":[{"id":1679506622082,"input":"6\n1 1 0 1 1 1","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Coding\\LANGUAGES\\C++\\CODING NINJA\\4. Arrays\\FindMaxConsecutiveOnes.cpp","group":"local","local":true}

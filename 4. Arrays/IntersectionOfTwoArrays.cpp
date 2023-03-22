@@ -1,4 +1,4 @@
-// print the common elements of both the array
+// note -> the array is sorted
 #include <bits/stdc++.h>
 using namespace std;
 vector<int> intersectionOfArrays(vector<int> A, vector<int> B)

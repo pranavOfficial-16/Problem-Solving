@@ -47,12 +47,13 @@ void print(Node *head)
         cout << temp->data << " ";
         temp = temp->next;
     }
+    cout << endl;
 }
 int main()
 {
     Node *head = input();
     int n;
-    cin >>n;
+    cin >> n;
     cout << "OLD LIST -> ";
     print(head);
     cout << "NEW LIST -> ";

@@ -1,0 +1,1 @@
+{"name":"Local: insert_node","url":"d:\\Coding\\LANGUAGES\\C++\\CODING NINJA\\9. Linked_list\\insert_node.cpp","tests":[{"id":1679495461936,"input":"1 2 3 4 5 -1\n5 100","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Coding\\LANGUAGES\\C++\\CODING NINJA\\9. Linked_list\\insert_node.cpp","group":"local","local":true}

@@ -5,8 +5,8 @@ void solve(int arr[], int n)
 {
     int maxi = INT_MIN;
     for (int i = 0; i < n; i++)
-    { 
-        for (int j = i; j < n ; j++)
+    {
+        for (int j = i; j < n; j++)
         {
             int sum = 0;
             for (int k = i; k <= j; k++)
@@ -18,27 +18,23 @@ void solve(int arr[], int n)
     }
     cout << maxi;
 }
-// cummulative sum approach -> TC - O(n^2)
+
+// better -> TC - O(n^2)
 void solve1(int arr[], int n)
 {
-    int *currsum = new int[n + 1];
-    currsum[0] = 0;
-    for (int i = 1; i <= n; i++)
+    int sum, maxi = INT_MIN;
+    for (int i = 0; i < n; i++)
     {
-        currsum[i] = currsum[i - 1] + arr[i - 1];
-    }
-    int maxi = INT_MIN;
-    for (int i = 1; i <= n; i++)
-    {
-        int sum = 0;
-        for (int j = 0; j < i; j++)
+        sum = 0;
+        for (int j = i; j < n; j++)
         {
-            sum = currsum[i] - currsum[j];
+            sum += arr[j];
             maxi = max(maxi, sum);
         }
     }
     cout << maxi;
 }
+
 // kadane's algorithm -> TC - O(n)
 void solve2(int arr[], int n)
 {
@@ -49,9 +45,9 @@ void solve2(int arr[], int n)
         sum += arr[i];
         if (sum < 0)
             sum = 0;
-        maxi = max(maxi,sum);
+        maxi = max(maxi, sum);
     }
-    cout<<maxi;
+    cout << maxi;
 }
 int main()
 {
@@ -60,6 +56,6 @@ int main()
     int *arr = new int[n];
     for (int i = 0; i < n; i++)
         cin >> arr[i];
-    solve2(arr, n);
+    solve1(arr, n);
     return 0;
 }

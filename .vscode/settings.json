@@ -17,6 +17,7 @@
     "chrono": "cpp",
     "span": "cpp",
     "unordered_set": "cpp",
-    "map": "cpp"
+    "map": "cpp",
+    "xtree": "cpp"
   }
 }

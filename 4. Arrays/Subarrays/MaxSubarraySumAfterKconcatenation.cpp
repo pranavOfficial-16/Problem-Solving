@@ -3,7 +3,7 @@
 using namespace std;
 void solve(vector<int> v, int n, int k)
 {
-    // copying the array twice
+    // copying the array k times
     vector<int> ans;
     for (int i = 0; i < k; i++)
         ans.insert(ans.begin(), v.begin(), v.end());

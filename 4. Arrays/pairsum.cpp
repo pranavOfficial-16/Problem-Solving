@@ -16,7 +16,7 @@ int pairSum(int *a, int n, int x)
     return count;
 }
 
-// optimal
+// optimal - the array should be sorted for this to work
 int pairSum1(int *a, int n, int x)
 {
     int low = 0;

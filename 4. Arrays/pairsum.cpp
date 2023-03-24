@@ -1,6 +1,7 @@
-// Find and return the total number of pairs in the array which sum to x.
 #include <iostream>
 using namespace std;
+
+// bruteforce
 int pairSum(int *a, int n, int x)
 {
     int count = 0;
@@ -14,6 +15,28 @@ int pairSum(int *a, int n, int x)
     }
     return count;
 }
+
+// optimal
+int pairSum1(int *a, int n, int x)
+{
+    int low = 0;
+    int high = n - 1;
+    int count = 0;
+    while (low < high)
+    {
+        if (a[low] + a[high] == x)
+        {
+            count++;
+            low++;
+            high--;
+        }
+        else if (a[low] + a[high] < x)
+            low++;
+        else
+            high--;
+    }
+    return count;
+}
 int main()
 {
     int n;
@@ -23,6 +46,6 @@ int main()
         cin >> a[i];
     int x;
     cin >> x;
-    cout << pairSum(a, n, x);
+    cout << pairSum1(a, n, x);
     return 0;
 }

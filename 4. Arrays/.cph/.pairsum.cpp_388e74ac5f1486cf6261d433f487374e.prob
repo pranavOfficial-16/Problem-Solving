@@ -1,0 +1,1 @@
+{"name":"Local: pairsum","url":"d:\\Coding\\LANGUAGES\\C++\\CODING NINJA\\4. Arrays\\pairsum.cpp","tests":[{"id":1679664361496,"input":"4\n-1 1 5 7\n6","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Coding\\LANGUAGES\\C++\\CODING NINJA\\4. Arrays\\pairsum.cpp","group":"local","local":true}

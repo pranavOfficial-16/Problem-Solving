@@ -4,6 +4,7 @@ int removeDuplicates(int arr[], int n)
 {
     if (n == 0 || n == 1)
         return n;
+    sort(arr, arr + n);
     int *temp = new int[n];
     int j = 0;
     for (int i = 0; i < n; i++)
@@ -14,6 +15,19 @@ int removeDuplicates(int arr[], int n)
     for (int i = 0; i < j; i++)
         arr[i] = temp[i];
     return j;
+}
+// using set
+int removeDuplicates1(vector<int> &nums)
+{
+    set<int> s;
+    for (int i = 0; i < nums.size(); i++)
+        s.insert(nums[i]);
+
+    nums.clear();
+    for (auto i : s)
+        nums.push_back(i);
+        
+    return s.size();
 }
 int main()
 {

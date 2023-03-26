@@ -1,6 +1,6 @@
 /*
-    H.C.F. of Two numbers  = Product of Two numbers/L.C.M of two numbers
-    L.C.M  of two numbers  = Product of Two numbers/H.C.F. of Two numbers
+    H.C.F. of Two numbers = Product of Two numbers/L.C.M of two numbers
+    L.C.M  of two numbers = Product of Two numbers/H.C.F. of Two numbers
 */
 #include <bits/stdc++.h>
 using namespace std;

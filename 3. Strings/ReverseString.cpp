@@ -1,10 +1,12 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
-void reverseString(char str[]){
-    int i=0,j=strlen(str)-1;
+void reverseString(char str[])
+{
+    int i = 0, j = strlen(str) - 1;
     char temp;
-    while(i<j){
+    while (i < j)
+    {
         temp = str[i];
         str[i] = str[j];
         str[j] = temp;
@@ -15,8 +17,8 @@ void reverseString(char str[]){
 int main()
 {
     char str[50];
-    cin.getline(str,50);
+    cin.getline(str, 50);
     reverseString(str);
-    cout<<str;
+    cout << str;
     return 0;
 }

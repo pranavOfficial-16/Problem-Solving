@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-int arrayRotateCheck(int *a,int n)
+int arrayMinCheck(int *a,int n)
 {
     int mi = INT_MAX;
     for (int i = 0; i < n; i++)
@@ -18,6 +18,6 @@ int main()
     int *a = new int[n];
     for (int i = 0; i < n; i++)
         cin >> a[i];
-    cout << arrayRotateCheck(a,n);
+    cout << arrayMinCheck(a,n);
     return 0;
 }

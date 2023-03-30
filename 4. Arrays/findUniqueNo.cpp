@@ -65,8 +65,8 @@
 using namespace std;
 int findUnique(int *arr, int n)
 {
-    int c = arr[0];
-    for (int i = 1; i < n; i++)
+    int c = 0;
+    for (int i = 0; i < n; i++)
         c = c ^ arr[i];
     return c;
 }

@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 vector<int> removeDuplicates(int *a, int size)
 {
@@ -6,7 +6,7 @@ vector<int> removeDuplicates(int *a, int size)
     unordered_map<int, bool> seen;
     for (int i = 0; i < size; i++)
     {
-        if (seen.count(a[i]) > 0)
+        if (seen[a[i]])
             continue;
         seen[a[i]] = true;
         output.push_back(a[i]);

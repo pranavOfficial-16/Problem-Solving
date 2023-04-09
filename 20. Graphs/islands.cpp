@@ -1,14 +1,12 @@
-//  BFS - Breadth first search traversal
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-void print(bool **edges, long long v, long long sv, bool *visited)
+void visitFiller(bool **edges, long long v, long long sv, bool *visited)
 {
     queue<long long> pendingVertices;
     pendingVertices.push(sv);
     visited[sv] = true;
     while (!pendingVertices.empty())
     {
-        cout << pendingVertices.front() << " ";
         for (long long i = 0; i < v; i++)
         {
             if (i == pendingVertices.front())
@@ -50,14 +48,15 @@ int main()
     {
         visited[i] = false;
     }
+    int count = 0;
     for (long long i = 0; i < v; i++)
     {
         if (!visited[i])
-            print(edges, v, i, visited);
+        {
+            count++;
+            visitFiller(edges, v, i, visited);
+        }
     }
-    delete[] visited;
-    for (long long i = 0; i < v; i++)
-        delete edges[i];
-    delete[] edges;
+    cout << count;
     return 0;
 }

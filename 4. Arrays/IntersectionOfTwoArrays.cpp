@@ -3,6 +3,7 @@
 using namespace std;
 vector<int> intersectionOfArrays(vector<int> A, vector<int> B)
 {
+    // For this logic to work both the arrays should be sorted before hand
     vector<int> ans;
     int i = 0, j = 0;
     while (i < A.size() && j < B.size())

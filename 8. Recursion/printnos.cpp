@@ -3,16 +3,15 @@
 using namespace std;
 void print(int n)
 {
+    //base case
     if (n == 0)
         return; 
-    /*
-    ascending print
+    
+    //Recursive call
     print(n - 1);
+
+    //processing
     cout << n << " ";
-    */
-    // descending print
-    cout << n << " ";
-    print(n - 1);
 }
 int main()
 {

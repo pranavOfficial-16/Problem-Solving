@@ -1,22 +1,22 @@
 /*
-    TC -> worst - O(N^2)  best - O(N)
-    Bubble sort -> pushes the max to the last by adjacent swaps (asc)
-    Bubble sort -> pushes the min to the last by adjacent swaps (des)
+    TC -> O(N^2)
+    SC -> O(1)
+    ascending sort -> pushes the max to the last by adjacent swaps (asc)
+    descending sort -> pushes the min to the last by adjacent swaps (des)
+    use case -> At ith round, ith largest element is kept in the right place (asc)
 */
 #include <iostream>
 using namespace std;
 void bubbleSort(int arr[], int n)
 {
-    for (int i = n - 1; i >= 0; i--)
+    for (int i = 0; i<n-1; i++)
     {
         int didswap = 0;
-        for (int j = 0; j <= i - 1; j++)
+        for (int j = 0; j<n-i; j++)
         {
-            if (arr[j] > arr[j + 1])
+            if (arr[j] > arr[j+1])
             {
-                int temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
+                swap(arr[j],arr[j+1]);
                 didswap = 1;
             }
         }

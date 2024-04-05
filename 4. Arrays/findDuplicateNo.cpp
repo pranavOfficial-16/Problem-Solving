@@ -88,12 +88,10 @@
 using namespace std;
 int duplicateNumber(int *arr, int n)
 {
-    int c = 0;
+    int ans = 0;
     for (int i = 0; i < n; i++)
-        c ^= arr[i];
-    for (int i = 0; i <= n - 2; i++)
-        c ^= i;
-    return c;
+        ans = ans ^ i ^ arr[i];
+    return ans;
 }
 int main()
 {

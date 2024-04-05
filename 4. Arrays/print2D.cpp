@@ -28,5 +28,6 @@ int main()
         }
     }
     print2DArray(a, row, col);
+    cout<<
     return 0;
 }

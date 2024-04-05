@@ -18,6 +18,7 @@
     "span": "cpp",
     "unordered_set": "cpp",
     "map": "cpp",
-    "xtree": "cpp"
+    "xtree": "cpp",
+    "new": "cpp"
   }
 }

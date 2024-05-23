@@ -20,5 +20,6 @@
     "map": "cpp",
     "xtree": "cpp",
     "new": "cpp"
-  }
+  },
+  "editor.fontSize": 18
 }

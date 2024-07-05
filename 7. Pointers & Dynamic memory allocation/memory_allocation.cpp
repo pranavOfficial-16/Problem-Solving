@@ -24,7 +24,7 @@ int main()
     delete a;   // single element
     delete[] a; // array deletion
     // dynamic memory allocation for 2d arrays
-    // m is rows and n is columns
+    // m is rows and o is columns
     int m, o;
     cin >> m >> o;
     int **p = new int *[m];

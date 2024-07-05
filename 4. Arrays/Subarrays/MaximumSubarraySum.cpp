@@ -56,6 +56,6 @@ int main()
     int *arr = new int[n];
     for (int i = 0; i < n; i++)
         cin >> arr[i];
-    solve1(arr, n);
+    solve2(arr, n);
     return 0;
 }

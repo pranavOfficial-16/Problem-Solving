@@ -16,9 +16,7 @@ int main()
     cin >> n;
     int *arr = new int[n];
     for (int i = 0; i < n; i++)
-    {
         cin >> arr[i];
-    }
     // Element to be searched
     cin >> x;
     cout << linearSearch(arr, n, x);

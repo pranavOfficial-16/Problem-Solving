@@ -27,13 +27,14 @@
 // Time complexity - o(log(min(a,b))),space complexity - o(log(min(a,b)))
 #include <bits/stdc++.h>
 using namespace std;
-int gcd(int a, int b)
-{
-    return b == 0 ? a : gcd(b, a % b);
+int gcd(int a, int b) {
+   if (a == 0) {
+      return b;
+   }
+   return gcd(b % a, a);
 }
-int main()
-{
-    int a = 98, b = 56;
-    cout << gcd(a, b);
-    return 0;
+int main() {
+   int a = 98, b = 56;
+   cout << gcd(a, b);
+   return 0;
 }

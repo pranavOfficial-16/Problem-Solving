@@ -41,7 +41,7 @@
 using namespace std;
 int binarySearch(int *a, int n, int key)
 {
-    int s = 0, e = n, mid;
+    int s = 0, e = n-1, mid;
     while (s <= e)
     {
         mid = s + (e - s) / 2;

@@ -26,7 +26,7 @@ bool isPalindrome(string s)
     string str = lower(s);
     string output = remove(str);
     int n = output.size();
-    for (int i = 0; i < n / 2; i++)
+    for (int i = 0; i < n; i++)
     {
         if (output[i] != output[n - i - 1])
             return false;

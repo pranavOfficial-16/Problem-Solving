@@ -1,4 +1,4 @@
-// rotate the array towards the left by d elements
+// rotate the array to left side by d elements
 #include <bits/stdc++.h>
 using namespace std;
 void rotate(int *a, int d, int n)

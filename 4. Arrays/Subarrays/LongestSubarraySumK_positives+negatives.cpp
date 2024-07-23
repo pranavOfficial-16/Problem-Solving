@@ -9,14 +9,17 @@ int solve(int arr[], int n, int k)
     for (int i = 0; i < n; i++)
     {
         sum += arr[i];
+        // check if sum matches the key
         if (sum == k)
             maxlen = max(maxlen, i + 1);
         int rem = sum - k;
+        // check if the rem is in the map
         if (mp.find(rem) != mp.end())
         {
             int len = i - mp[rem];
             maxlen = max(maxlen, len);
         }
+        // if the rem is not in the map
         if (mp.find(sum) == mp.end())
             mp[sum] = i;
     }

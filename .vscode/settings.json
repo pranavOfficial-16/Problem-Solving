@@ -19,7 +19,15 @@
     "unordered_set": "cpp",
     "map": "cpp",
     "xtree": "cpp",
-    "new": "cpp"
+    "new": "cpp",
+    "array": "cpp",
+    "forward_list": "cpp",
+    "string": "cpp",
+    "unordered_map": "cpp",
+    "initializer_list": "cpp",
+    "regex": "cpp",
+    "valarray": "cpp"
   },
-  "editor.fontSize": 18
+  "editor.fontSize": 18,
+  "C_Cpp.errorSquiggles": "enabledIfIncludesResolve"
 }

@@ -50,8 +50,10 @@ int solve2(int arr[], int n, int k)
             sum -= arr[left];
             left++;
         }
+        
         if (sum == k)
             maxlen = max(maxlen, right - left + 1);
+        
         right++;
         if (right < n)
             sum += arr[right];

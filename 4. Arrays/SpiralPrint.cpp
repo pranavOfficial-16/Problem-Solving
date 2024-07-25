@@ -1,42 +1,44 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-void spiralPrint(int a[][50], int m, int n)
-{
-    int row_start = 0, column_start = 0;
-    while (row_start < m && column_start < n)
-    {
-        for (int i = column_start; i < n; i++)
-            cout << a[row_start][i] << " ";
-        row_start++;
-        for (int i = row_start; i < m; ++i)
-            cout << a[i][n - 1] << " ";
-        n--;
-        if (row_start < m)
-        {
-            for (int i = n - 1; i >= column_start; --i)
-                cout << a[m - 1][i] << " ";
-            m--;
-        }
-        if (column_start < n)
-        {
-            for (int i = m - 1; i >= row_start; --i)
-                cout << a[i][column_start] << " ";
-            column_start++;
-        }
-    }
-}
-int main()
-{
-    int a[50][50];
-    int m, n;
-    cin >> m >> n;
-    for (int i = 0; i < m; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            cin >> a[i][j];
-        }
-    }
-    spiralPrint(a, m, n);
-    return 0;
+vector<int> spiralOrder(vector<vector<int>>& matrix) {
+
+   int n = matrix.size();
+   int m = matrix[0].size();
+
+   int count = 0;
+   int total = n * m;
+   vector<int> ans;
+
+   int startingRow = 0;
+   int startingCol = 0;
+   int endingRow = n - 1;
+   int endingCol = m - 1;
+
+   while (startingRow <= endingRow && startingCol <= endingCol) {
+
+      // starting row
+      for (int index = startingCol; index <= endingCol; index++)
+         ans.push_back(matrix[startingRow][index]);
+      startingRow++;
+
+      // ending column
+      for (int index = startingRow; index <= endingRow; index++)
+         ans.push_back(matrix[index][endingCol]);
+      endingCol--;
+
+      // ending row
+      if (startingRow <= endingRow) {
+         for (int index = endingCol; index >= startingCol; index--)
+            ans.push_back(matrix[endingRow][index]);
+         endingRow--;
+      }
+
+      // starting column
+      if (startingCol <= endingCol) {
+         for (int index = endingRow; index >= startingRow; index--)
+            ans.push_back(matrix[index][startingCol]);
+         startingCol++;
+      }
+   }
+   return ans;
 }

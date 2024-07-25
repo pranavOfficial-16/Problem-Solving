@@ -550,7 +550,7 @@
 // using namespace std;
 // int main()
 // {
-//     int n; 
+//     int n;
 //     cin >> n;
 //     // upperhalf
 //     for (int i = 0; i <= n / 2; i++)
@@ -591,8 +591,8 @@
 //     {
 //         for (int j = 0; j < size; j++)
 //         {
-//             int formula = n - min(min(i, j), min((size - 1) - i, (size - 1) - j));
-//             cout << formula << " ";
+//             int formula = n - min(min(i, j), min((size - 1) - i, (size - 1) -
+//             j)); cout << formula << " ";
 //         }
 //         cout << endl;
 //     }
@@ -617,41 +617,41 @@
     2*3
     1
 */
-#include <bits/stdc++.h>
-using namespace std;
-int main()
-{
-    int n;
-    cin>>n;
-    vector<int> v; 
-    // upper half
-    int count = 1;
-    for(int i=1;i<=n;i++){
-        for(int j=1;j<=i;j++){
-            if(j==1)
-                v.push_back(count);
-            if(i==j)
-                cout<<count;
-            else
-                cout<<count<<"*";
-            count++;
-        }
-        cout<<endl;
-    }
-    // lower half
-    int m = v.size()-1;
-    int num;
-    for(int i=n;i>=1;i--){
-        num = v[m];
-        for(int j=1;j<=i;j++){
-            if(i == j)
-                cout<<num;
-            else
-                cout<<num<<"*";
-            num++;
-        }
-        m--;
-        cout<<endl;
-    }
-    return 0;
-}
+// #include <bits/stdc++.h>
+// using namespace std;
+// int main()
+// {
+//     int n;
+//     cin>>n;
+//     vector<int> v;
+//     // upper half
+//     int count = 1;
+//     for(int i=1;i<=n;i++){
+//         for(int j=1;j<=i;j++){
+//             if(j==1)
+//                 v.push_back(count);
+//             if(i==j)
+//                 cout<<count;
+//             else
+//                 cout<<count<<"*";
+//             count++;
+//         }
+//         cout<<endl;
+//     }
+//     // lower half
+//     int m = v.size()-1;
+//     int num;
+//     for(int i=n;i>=1;i--){
+//         num = v[m];
+//         for(int j=1;j<=i;j++){
+//             if(i == j)
+//                 cout<<num;
+//             else
+//                 cout<<num<<"*";
+//             num++;
+//         }
+//         m--;
+//         cout<<endl;
+//     }
+//     return 0;
+// }

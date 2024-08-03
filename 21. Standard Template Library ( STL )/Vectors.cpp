@@ -88,7 +88,7 @@ int main() {
    int n = 3;
    int m = 4;
    vector<vector<int>> vec(n, vector<int>(m));
-   cout << vec.size()<<endl;
+   cout << vec.size() << endl;
    cout << vec[0].size() << endl;
    for (int i = 0; i < n; i++) {
       for (int j = 0; j < m; j++) {

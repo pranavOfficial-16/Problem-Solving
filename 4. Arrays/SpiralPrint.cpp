@@ -5,8 +5,6 @@ vector<int> spiralOrder(vector<vector<int>>& matrix) {
    int n = matrix.size();
    int m = matrix[0].size();
 
-   int count = 0;
-   int total = n * m;
    vector<int> ans;
 
    int startingRow = 0;

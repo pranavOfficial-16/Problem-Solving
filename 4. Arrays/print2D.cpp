@@ -27,7 +27,5 @@ int main()
             cin >> a[i][j];
         }
     }
-    print2DArray(a, row, col);
-    cout<<
-    return 0;
+    // print2DArray(a, row, col);
 }

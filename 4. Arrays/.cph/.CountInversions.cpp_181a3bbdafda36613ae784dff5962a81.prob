@@ -1,0 +1,1 @@
+{"name":"Local: CountInversions","url":"d:\\Coding\\2. DSA in C++\\Codes\\4. Arrays\\CountInversions.cpp","tests":[{"id":1723725698403,"input":"5\n1 20 6 4 5","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Coding\\2. DSA in C++\\Codes\\4. Arrays\\CountInversions.cpp","group":"local","local":true}

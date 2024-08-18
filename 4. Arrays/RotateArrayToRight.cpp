@@ -18,6 +18,7 @@ void rotate(int *a, int d, int n) {
    rev(a, d, n - 1);
    rev(a, 0, d - 1);
 }
+
 // method 2
 void rotate1(int *a, int d, int n) {
    int *temp = new int[n];

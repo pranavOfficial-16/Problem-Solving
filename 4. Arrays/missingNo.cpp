@@ -4,9 +4,7 @@ int missingNumber(int arr[], int n)
 {
     unordered_map<int, int> mpp;
     for (int i = 0; i < n; i++)
-    {
         mpp[arr[i]] = 1;
-    }
     for (int i = 0; i <= n; i++)
     {
         if (mpp[i] != 1)

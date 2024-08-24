@@ -1,5 +1,4 @@
-#include<iostream>
-#include<cstring>
+#include <bits/stdc++.h>
 using namespace std;
 void trimSpaces(char input[])
 {
@@ -18,8 +17,8 @@ void trimSpaces(char input[])
 int main()
 {
     char input[20];
-    cin.getline(input,20);
+    cin.getline(input, 20);
     trimSpaces(input);
-    cout<<input;
+    cout << input;
     return 0;
 }

@@ -9,18 +9,18 @@
 using namespace std;
 void bubbleSort(int arr[], int n)
 {
-    for (int i = 0; i<n-1; i++)
+    for (int i = 0; i < n - 1; i++)
     {
         int didswap = 0;
-        for (int j = 0; j<n-i; j++)
+        for (int j = 0; j < n - i; j++)
         {
-            if (arr[j] > arr[j+1])
+            if (arr[j] > arr[j + 1])
             {
-                swap(arr[j],arr[j+1]);
+                swap(arr[j], arr[j + 1]);
                 didswap = 1;
             }
         }
-        if(didswap == 0)
+        if (didswap == 0)
             break;
     }
 }

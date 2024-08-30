@@ -1,8 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-// bruteforce approach
-
 bool pallindrome(string s, int low, int high)
 {
     while (low < high)
@@ -14,6 +11,8 @@ bool pallindrome(string s, int low, int high)
     }
     return true;
 }
+
+// bruteforce approach
 string longestPalindrome(string s)
 {
     int n = s.size(), start = 0, maxi = 0;

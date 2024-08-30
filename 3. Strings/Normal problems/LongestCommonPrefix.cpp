@@ -17,3 +17,8 @@ string longestCommonPrefix(vector<string> &strs)
     }
     return ans;
 }
+int main()
+{
+    vector<string> arr{"graceful", "grace", "disgraceful", "gracefully"};
+    cout << longestCommonPrefix(arr) << endl;
+}

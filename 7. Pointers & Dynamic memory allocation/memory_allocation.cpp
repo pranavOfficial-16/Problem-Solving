@@ -10,17 +10,15 @@ int main()
     int n;
     cin >> n;
     //  dynamic memory allocation for 1d arrays
-    //  dynamic meomory allocation - saved in heap
+    //  dynamic memory allocation - saved in heap
     int *a = new int[n];
     for (int i = 0; i < n; i++)
-    {
         cin >> a[i];
-    }
+
     for (int i = 0; i < n; i++)
-    {
         cout << a[i];
-    }
-    // we should manually deacclocate the dynamic variable
+        
+    // we should manually deallocate the dynamic variable
     delete a;   // single element
     delete[] a; // array deletion
     // dynamic memory allocation for 2d arrays

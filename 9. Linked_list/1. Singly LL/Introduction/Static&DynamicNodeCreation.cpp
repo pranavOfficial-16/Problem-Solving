@@ -1,13 +1,4 @@
-#include "Node.cpp"
-void print(Node *head)
-{
-    Node *temp = head;
-    while (temp != NULL)
-    {
-        cout << temp->data << " ";
-        temp = temp->next;
-    }
-}
+#include "SingleLinkedListSyntax.cpp"
 int main()
 {
     // Statically
@@ -29,5 +20,6 @@ int main()
     // Connecting nodes
     n3->next = n4;
 
+    print(head);
     print(head);
 }

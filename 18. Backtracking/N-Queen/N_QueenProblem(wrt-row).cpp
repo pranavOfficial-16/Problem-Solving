@@ -64,8 +64,7 @@ void solve(int row, vector<vector<int>> &ans, vector<vector<int>> &board, int n)
         {
             board[row][col] = 1;
             solve(row + 1, ans, board, n);
-            // backtrack
-            board[row][col] = 0;
+            board[row][col] = 0; // backtrack
         }
     }
 }

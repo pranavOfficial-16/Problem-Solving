@@ -42,7 +42,7 @@ void solve(vector<vector<int>> &arr, int n, vector<vector<int>> visited, vector<
     // Up
     solve(arr, n, visited, ans, x - 1, y);
 
-    visited[x][y] = 0;
+    visited[x][y] = 0; // backtrack
 }
 vector<vector<int>> ratInAMaze(vector<vector<int>> arr, int n)
 {

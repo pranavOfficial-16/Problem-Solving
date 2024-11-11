@@ -29,7 +29,7 @@ void solve(vector<vector<int>> &arr, int n, vector<string> &ans,
     // Up
     solve(arr, n, ans, visited, x - 1, y, path + 'U');
 
-    visited[x][y] = 0;
+    visited[x][y] = 0; // backtrack
 }
 vector<string> searchMaze(vector<vector<int>> arr, int n)
 {

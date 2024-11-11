@@ -1,0 +1,1 @@
+{"name":"Local: SubsetSum","url":"d:\\Coding\\2. DSA in C++\\Codes\\18. Backtracking\\SubsetSum.cpp","tests":[{"id":1730720172730,"input":"1\n3 3\n1 2 3","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Coding\\2. DSA in C++\\Codes\\18. Backtracking\\SubsetSum.cpp","group":"local","local":true}

@@ -1,34 +1,23 @@
-#include<iostream>
+#include <bits/stdc++.h>
 using namespace std;
-bool checkPalindrome(char *a){
-    static int i = 0;
-    int c = 0;
-    while (a[c] != '\0')
-    {
-        c++;
-    }
-    static int d = c;
-    if (a[i] == a[d - 1] && i < d)
-    {
-        i++;
-        d--;
-        return checkPalindrome(a);
-    }
+bool checkPalindrome(char *a, int i, int j)
+{
+    // base case
+    if (i > j)
+        return true;
+
+    if (a[i] != a[j])
+        return false;
     else
-    {
-        if (i < d)
-            return false;
-        else
-            return true;
-    }
+        checkPalindrome(a, i + 1, j - 1);
 }
 int main()
 {
     char a[50];
-    cin>>a;
-    if(checkPalindrome(a))
-        cout<<"true";
+    cin >> a;
+    if (checkPalindrome(a, 0, strlen(a) - 1))
+        cout << "true";
     else
-        cout<<"false";
+        cout << "false";
     return 0;
 }

@@ -16,7 +16,7 @@ bool isSafe(int row, int col, vector<vector<int>> &board, int n)
 {
     int x = row;
     int y = col;
-    
+
     // check for same row
     while (y >= 0)
     {
@@ -64,8 +64,7 @@ void solve(int col, vector<vector<int>> &ans, vector<vector<int>> &board, int n)
         {
             board[row][col] = 1;
             solve(col + 1, ans, board, n);
-            // backtrack
-            board[row][col] = 0;
+            board[row][col] = 0; // backtrack
         }
     }
 }

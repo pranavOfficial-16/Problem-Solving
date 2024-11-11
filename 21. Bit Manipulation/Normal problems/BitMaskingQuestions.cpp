@@ -52,6 +52,12 @@
 //      return 0;
 //  }
 
+// Set the rightmost unset bit
+// int setBit(int n)
+// {
+//     return n | (n + 1);
+// }
+
 // check if a given no is power of 2 using bits
 //  #include<iostream>
 //  using namespace std;
@@ -197,11 +203,11 @@
 //     return 0;
 // }
 
-#include<iostream>
+#include <iostream>
 using namespace std;
 int main()
 {
-    int a = 97<<1;
-    cout<<a;
+    int a = 97 << 1;
+    cout << a;
     return 0;
 }

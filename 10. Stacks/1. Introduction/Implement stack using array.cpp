@@ -2,14 +2,14 @@
 using namespace std;
 class StackUsingArrays
 {
-    int *data;
-    int nextIndex;
-    int capacity;
+    int *data;      // array
+    int nextIndex;  // index of the array
+    int capacity;   // size of the array
 
 public:
-    StackUsingArrays()
+    StackUsingArrays(int totalsize)
     {
-        capacity = 4;
+        capacity = totalsize;
         data = new int[capacity];
         nextIndex = 0;
     }
@@ -62,7 +62,7 @@ public:
 };
 int main()
 {
-    StackUsingArrays s;
+    StackUsingArrays s(4);
     s.push(10);
     s.push(20);
     s.push(30);

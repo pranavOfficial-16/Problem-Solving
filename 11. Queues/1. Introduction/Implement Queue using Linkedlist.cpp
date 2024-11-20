@@ -30,7 +30,7 @@ public:
     int getSize() { return size; }
 
     bool isEmpty() { return size == 0; }
-
+ 
     T front()
     {
         if (isEmpty())

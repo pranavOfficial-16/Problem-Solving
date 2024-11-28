@@ -88,6 +88,7 @@ void elementsInRangeK1K2(BinaryTreeNode<int> *root, int k1, int k2)
         elementsInRangeK1K2(root->right, k1, k2);
 }
 // Check if a Binary Tree is BST
+// approach 1
 class Pair
 {
 public:
@@ -108,8 +109,8 @@ Pair solve(BinaryTreeNode<int> *root)
     Pair left = solve(root->left);
     Pair right = solve(root->right);
     Pair p;
-    p.minimum = min(root->data, min(left.minimum, right.minimum));
-    p.maximum = max(root->data, max(left.maximum, right.maximum));
+    p.minimum = min(root->data, left.minimum);
+    p.maximum = max(root->data, right.maximum);
     p.check = (root->data > left.maximum) && (root->data < right.minimum) && left.check && right.check;
     return p;
 }
@@ -117,6 +118,39 @@ bool isBST(BinaryTreeNode<int> *root)
 {
     return solve(root).check;
 }
+
+// Check if a Binary Tree is BST
+// approach 2
+BinaryTreeNode<int> *findMin(BinaryTreeNode<int> *node)
+{
+    if (node == NULL)
+        return NULL;
+    if (node->left == NULL)
+        return node;
+    return findMin(node->left);
+}
+BinaryTreeNode<int> *findMax(BinaryTreeNode<int> *node)
+{
+    if (node == NULL)
+        return NULL;
+    if (node->right == NULL)
+        return node;
+    return findMax(node->right);
+}
+bool isValidBST(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+        return true;
+    BinaryTreeNode<int> *leftmax = findMax(root->left);
+    BinaryTreeNode<int> *rightmin = findMin(root->right);
+
+    if ((leftmax && root->data <= leftmax->data) ||
+        (rightmin && root->data >= rightmin->data))
+        return false;
+
+    return isValidBST(root->left) && isValidBST(root->right);
+}
+
 // Construct BST from a Sorted Array
 BinaryTreeNode<int> *solve(int *arr, int start, int end)
 {

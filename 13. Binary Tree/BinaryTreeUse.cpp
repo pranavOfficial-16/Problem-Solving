@@ -82,6 +82,20 @@ bool isNodePresent(BinaryTreeNode<int> *root, int x)
     else
         return false;
 }
+
+// Note - Both the approaches are same
+
+// Approach 1
+
+// int height(BinaryTreeNode<int> *root)
+// {
+//     if (root == NULL)
+//         return 0;
+//     return 1 + max(height(root->left), height(root->right));
+// }
+
+// Approach 2
+
 int height(BinaryTreeNode<int> *root)
 {
     if (root == NULL)
@@ -93,6 +107,7 @@ int height(BinaryTreeNode<int> *root)
     else
         return rightdepth + 1;
 }
+
 void mirrorBinaryTree(BinaryTreeNode<int> *root)
 {
     if (root == NULL)
@@ -181,13 +196,8 @@ BinaryTreeNode<int> *buildTree(int *preorder, int start, int *inorder, int end)
 // {
 //     return convert(postorder, inorder, 0, end - 1);
 // }
+
 // diameter of binary tree
-// int height(BinaryTreeNode<int> *root)
-// {
-//     if (root == NULL)
-//         return 0;
-//     return 1 + max(height(root->left), height(root->right));
-// }
 int diameter(BinaryTreeNode<int> *root)
 {
     if (root == NULL)
@@ -215,7 +225,7 @@ pair<int, int> heightDiameter(BinaryTreeNode<int> *root)
     int height = 1 + max(lh, rh);
     int diameter = max(lh + rh, max(ld, rd));
     pair<int, int> p;
-    p.first = height;
+    p.first = height; 
     p.second = diameter;
     return p;
 }

@@ -37,6 +37,12 @@ private:
             return node;
         return findMin(node->left);
     }
+    BinaryTreeNode<int> *findMax(BinaryTreeNode<int> *node)
+    {
+        if (node->right == NULL)
+            return node;
+        return findMax(node->right);
+    }
     BinaryTreeNode<int> *remove(BinaryTreeNode<int> *node, int data)
     {
         if (node == NULL)

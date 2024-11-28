@@ -56,9 +56,7 @@ int numNodes(TreeNode<int> *root)
         return 0;
     int ans = 1;
     for (int i = 0; i < root->children.size(); i++)
-    {
         ans += numNodes(root->children[i]);
-    }
     return ans;
 }
 int sumOfNodes(TreeNode<int> *root)
@@ -67,9 +65,7 @@ int sumOfNodes(TreeNode<int> *root)
         return 0;
     int sum = root->data;
     for (int i = 0; i < root->children.size(); i++)
-    {
         sum += sumOfNodes(root->children[i]);
-    }
     return sum;
 }
 TreeNode<int> *maxDataNode(TreeNode<int> *root)
@@ -113,6 +109,7 @@ int getHeight(TreeNode<int> *root)
     }
     return height + 1;
 }
+// printing the depth of the node based on k (eg: k = 3), we print nodes on level k
 void printAtLevelK(TreeNode<int> *root, int k)
 {
     if (root == NULL)

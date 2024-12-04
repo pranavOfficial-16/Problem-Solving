@@ -24,6 +24,7 @@ class PriorityQueue
     {
         pq.push_back(element);
         int childIndex = getSize() - 1;
+        // up-heapify
         while (childIndex > 0)
         {
             int parentIndex = (childIndex - 1) / 2;
@@ -53,13 +54,9 @@ class PriorityQueue
         {
             int minIndex = parentIndex;
             if (pq[minIndex] > pq[leftChildIndex])
-            {
                 minIndex = leftChildIndex;
-            }
             if (rightChildIndex < getSize() && pq[minIndex] > pq[rightChildIndex])
-            {
                 minIndex = rightChildIndex;
-            }
             if (minIndex == parentIndex)
                 break;
             int temp = pq[minIndex];

@@ -24,6 +24,7 @@ public:
     {
         pq.push_back(element);
         int childIndex = getSize() - 1;
+        // up-heapify
         while (childIndex > 0)
         {
             int parentIndex = (childIndex - 1) / 2;
@@ -51,22 +52,18 @@ public:
         int rightChildIndex = 2 * parentIndex + 2;
         while (leftChildIndex < getSize())
         {
-            int minIndex = parentIndex;
-            if (pq[minIndex] < pq[leftChildIndex])
-            {
-                minIndex = leftChildIndex;
-            }
-            if (rightChildIndex < getSize() && pq[minIndex] < pq[rightChildIndex])
-            {
-                minIndex = rightChildIndex;
-            }
-            if (minIndex == parentIndex)
+            int maxIndex = parentIndex;
+            if (pq[maxIndex] < pq[leftChildIndex])
+                maxIndex = leftChildIndex;
+            if (rightChildIndex < getSize() && pq[maxIndex] < pq[rightChildIndex])
+                maxIndex = rightChildIndex;
+            if (maxIndex == parentIndex)
                 break;
-            int temp = pq[minIndex];
-            pq[minIndex] = pq[parentIndex];
+            int temp = pq[maxIndex];
+            pq[maxIndex] = pq[parentIndex];
             pq[parentIndex] = temp;
 
-            parentIndex = minIndex;
+            parentIndex = maxIndex;
             leftChildIndex = 2 * parentIndex + 1;
             rightChildIndex = 2 * parentIndex + 2;
         }

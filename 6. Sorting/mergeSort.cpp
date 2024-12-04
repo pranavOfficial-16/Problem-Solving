@@ -38,7 +38,6 @@ using namespace std;
 */
 void merge(int *arr, int s, int mid, int e)
 {
-
     int left = s;
     int right = mid + 1;
     vector<int> sortedarr;

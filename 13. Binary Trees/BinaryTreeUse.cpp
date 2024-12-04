@@ -225,7 +225,7 @@ pair<int, int> heightDiameter(BinaryTreeNode<int> *root)
     int height = 1 + max(lh, rh);
     int diameter = max(lh + rh, max(ld, rd));
     pair<int, int> p;
-    p.first = height; 
+    p.first = height;
     p.second = diameter;
     return p;
 }
@@ -260,11 +260,7 @@ int getSum(BinaryTreeNode<int> *root)
 {
     if (root == NULL)
         return 0;
-    static int sum = 0;
-    sum += root->data;
-    getSum(root->left);
-    getSum(root->right);
-    return sum;
+    return root->data + getSum(root->left) + getSum(root->right);
 }
 // Check Balanced
 int height(BinaryTreeNode<int> *root)
@@ -658,6 +654,244 @@ vector<int> *longestPath(BinaryTreeNode<int> *root)
         return v;
     }
 }
+
+// Binary Tree Maximum Path Sum
+int maxPathDown(BinaryTreeNode<int> *root, int &maxi)
+{
+    if (root == NULL)
+        return 0;
+    int left = max(0, maxPathDown(root->left, maxi));
+    int right = max(0, maxPathDown(root->right, maxi));
+    maxi = max(maxi, left + right + root->data);
+    return root->data + max(left, right);
+}
+int maxPathSum(BinaryTreeNode<int> *root)
+{
+    int maxi = INT_MIN;
+    maxPathDown(root, maxi);
+    return maxi;
+}
+
+// Same Tree
+// bool isSameTree(TreeNode *p, TreeNode *q)
+// {
+//     if (p == NULL && q == NULL)
+//         return true;
+//     if (p == NULL || q == NULL)
+//         return false;
+//     return (p->val == q->val) && isSameTree(p->left, q->left) &&
+//            isSameTree(p->right, q->right);
+// }
+
+// Boundary Traversal of Binary Tree
+void addLeftBoundary(BinaryTreeNode<int> *root, vector<int> &ans)
+{
+    BinaryTreeNode<int> *curr = root->left;
+    while (curr)
+    {
+        if (curr->left || curr->right)
+            ans.push_back(curr->data);
+        if (curr->left)
+            curr = curr->left;
+        else
+            curr = curr->right;
+    }
+}
+void addLeaves(BinaryTreeNode<int> *root, vector<int> &ans)
+{
+    if (root == NULL)
+        return;
+    if (root->left == NULL && root->right == NULL)
+    {
+        ans.push_back(root->data);
+        return;
+    }
+    addLeaves(root->left, ans);
+    addLeaves(root->right, ans);
+}
+
+void addRightBoundary(BinaryTreeNode<int> *root, vector<int> &ans)
+{
+    BinaryTreeNode<int> *curr = root->right;
+    vector<int> tmp;
+    while (curr)
+    {
+        if (curr->left || curr->right)
+            tmp.push_back(curr->data);
+        if (curr->right)
+            curr = curr->right;
+        else
+            curr = curr->left;
+    }
+
+    for (int i = tmp.size() - 1; i >= 0; --i)
+        ans.push_back(tmp[i]);
+}
+vector<int> traverseBoundary(BinaryTreeNode<int> *root)
+{
+    vector<int> ans;
+
+    // edge cases
+    if (root == NULL)
+        return ans;
+    if (root->left == NULL && root->right == NULL)
+        return {root->data};
+
+    ans.push_back(root->data);
+
+    addLeftBoundary(root, ans);  // Add left boundary (excluding the root)
+    addLeaves(root, ans);        // Add all leaf nodes
+    addRightBoundary(root, ans); // Add right boundary (excluding the root and leaves)
+
+    return ans;
+}
+
+// Vertical Order Traversal
+vector<vector<int>> findVertical(BinaryTreeNode<int> *root)
+{
+    // Map to store nodes based on vertical and level information
+    map<int, map<int, multiset<int>>> nodes;
+
+    // Queue for BFS traversal, each
+    // element is a pair containing node
+    // and its vertical and level information
+    queue<pair<BinaryTreeNode<int> *, pair<int, int>>> todo;
+
+    todo.push({root, {0, 0}});
+
+    while (!todo.empty())
+    {
+        auto p = todo.front();
+        todo.pop();
+        BinaryTreeNode<int> *temp = p.first;
+
+        int x = p.second.first;
+        int y = p.second.second;
+
+        nodes[x][y].insert(temp->data);
+
+        if (temp->left)
+            todo.push({temp->left, {x - 1, y + 1}});
+
+        if (temp->right)
+            todo.push({temp->right, {x + 1, y + 1}});
+    }
+    vector<vector<int>> ans;
+    for (auto p : nodes)
+    {
+        vector<int> col;
+        for (auto q : p.second)
+            col.insert(col.end(), q.second.begin(), q.second.end());
+        ans.push_back(col);
+    }
+    return ans;
+}
+
+// Top view
+vector<int> topView(BinaryTreeNode<int> *root)
+{
+    vector<int> ans;
+    if (root == NULL)
+        return ans;
+
+    map<int, int> mpp;                         // line no and node value
+    queue<pair<BinaryTreeNode<int> *, int>> q; // node and line no
+    q.push({root, 0});
+    while (!q.empty())
+    {
+        auto it = q.front();
+        q.pop();
+        auto node = it.first;
+        int line = it.second;
+        if (mpp.find(line) == mpp.end())
+            mpp[line] = node->data;
+        if (node->left)
+            q.push({node->left, line - 1});
+        if (node->right)
+            q.push({node->right, line + 1});
+    }
+    for (auto it : mpp)
+        ans.push_back(it.second);
+    return ans;
+}
+
+// Bottom View
+vector<int> bottomView(BinaryTreeNode<int> *root)
+{
+    vector<int> ans;
+    if (root == NULL)
+        return ans;
+
+    map<int, int> mpp;                         // line no and node value
+    queue<pair<BinaryTreeNode<int> *, int>> q; // node and line no
+    q.push({root, 0});
+
+    while (!q.empty())
+    {
+        auto it = q.front();
+        q.pop();
+        auto node = it.first;
+        int line = it.second;
+        mpp[line] = node->data;
+        if (node->left)
+            q.push({node->left, line - 1});
+        if (node->right)
+            q.push({node->right, line + 1});
+    }
+    for (auto it : mpp)
+        ans.push_back(it.second);
+    return ans;
+}
+
+// Right side view
+void solveright(BinaryTreeNode<int> *root, int level, vector<int> &ans)
+{
+    if (root == NULL)
+        return;
+    if (level == ans.size())
+        ans.push_back(root->data);
+    solveright(root->right, level + 1, ans);
+    solveright(root->left, level + 1, ans);
+}
+vector<int> rightSideView(BinaryTreeNode<int> *root)
+{
+    vector<int> ans;
+    solveright(root, 0, ans);
+    return ans;
+}
+
+// Left side view
+void solveleft(BinaryTreeNode<int> *root, int level, vector<int> &ans)
+{
+    if (root == NULL)
+        return;
+    if (level == ans.size())
+        ans.push_back(root->data);
+    solveleft(root->left, level + 1, ans);
+    solveleft(root->right, level + 1, ans);
+}
+vector<int> leftSideView(BinaryTreeNode<int> *root)
+{
+    vector<int> ans;
+    solveleft(root, 0, ans);
+    return ans;
+}
+
+// Symmetric Tree
+bool checkSymmetric(BinaryTreeNode<int> *left, BinaryTreeNode<int> *right)
+{
+    if (left == NULL || right == NULL)
+        return left == right;
+    if (left->data != right->data)
+        return false;
+    return checkSymmetric(left->left, right->right) &&
+           checkSymmetric(left->right, right->left);
+}
+bool isSymmetric(BinaryTreeNode<int> *root)
+{
+    return root == NULL || checkSymmetric(root->left, root->right);
+}
+
 // 1 2 3 4 5 6 7 -1 -1 -1 -1 8 9 -1 -1 -1 -1 -1 -1
 int main()
 {

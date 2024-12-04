@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #include "MinPriorityQueue.h"
 using namespace std;
+// inplace means using the same array instead of using extra space
 void inplaceHeapSort(int pq[], int n)
 {
     // build the heap in input array

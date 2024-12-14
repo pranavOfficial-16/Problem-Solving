@@ -143,7 +143,7 @@ void postOrder(BinaryTreeNode<int> *root)
     cout << root->data << " ";
 }
 // Construct Tree from Preorder and Inorder
-int search(int *inorder, int start, int end, int curr)
+int search(vector<int> inorder, int start, int end, int curr)
 {
     for (int i = start; i <= end; i++)
     {
@@ -151,51 +151,58 @@ int search(int *inorder, int start, int end, int curr)
             return i;
     }
 }
-BinaryTreeNode<int> *convert(int *preorder, int *inorder, int start, int end)
+BinaryTreeNode<int> *solve(vector<int> preorder,
+                           vector<int> inorder, int &idx, int start, int end)
 {
-    static int idx = 0;
     if (start > end)
         return NULL;
-    int curr = preorder[idx];
+    int currnode = preorder[idx];
     idx++;
-    BinaryTreeNode<int> *node = new BinaryTreeNode<int>(curr);
+    BinaryTreeNode<int> *node = new BinaryTreeNode(currnode);
     if (start == end)
         return node;
-    int pos = search(inorder, start, end, curr);
-    node->left = convert(preorder, inorder, start, pos - 1);
-    node->right = convert(preorder, inorder, pos + 1, end);
+    int pos = search(inorder, start, end, currnode);
+    node->left = solve(preorder, inorder, idx, start, pos - 1);
+    node->right = solve(preorder, inorder, idx, pos + 1, end);
+    return node;
 }
-BinaryTreeNode<int> *buildTree(int *preorder, int start, int *inorder, int end)
+BinaryTreeNode<int> *buildTree(vector<int> &preorder, vector<int> &inorder)
 {
-    return convert(preorder, inorder, 0, end - 1);
+    int idx = 0, start = 0, end = preorder.size() - 1;
+    return solve(preorder, inorder, idx, start, end);
 }
+
 // Construct Tree from Postorder and Inorder
-// int search(int *inorder, int start, int end, int curr)
-// {
-//     for (int i = start; i <= end; i++)
-//     {
-//         if (inorder[i] == curr)
-//             return i;
-//     }
-// }
-// BinaryTreeNode<int> *convert(int *postorder, int *inorder, int start, int end)
-// {
-//     static int idx = end;
-//     if (start > end)
-//         return NULL;
-//     int curr = postorder[idx];
-//     idx--;
-//     BinaryTreeNode<int> *node = new BinaryTreeNode<int>(curr);
-//     if (start == end)
-//         return node;
-//     int pos = search(inorder, start, end, curr);
-//     node->right = convert(postorder, inorder, pos + 1, end);
-//     node->left = convert(postorder, inorder, start, pos - 1);
-// }
-// BinaryTreeNode<int> *buildTree(int *postorder, int start, int *inorder, int end)
-// {
-//     return convert(postorder, inorder, 0, end - 1);
-// }
+int search(vector<int> inorder, int start, int end, int curr)
+{
+    for (int i = start; i <= end; i++)
+    {
+        if (inorder[i] == curr)
+            return i;
+    }
+}
+BinaryTreeNode<int> *solve(vector<int> inorder,
+                           vector<int> postorder, int &idx, int start, int end)
+{
+    if (start > end)
+        return NULL;
+    int currnode = postorder[idx];
+    idx--;
+    BinaryTreeNode<int> *node = new BinaryTreeNode(currnode);
+    if (start == end)
+        return node;
+    int pos = search(inorder, start, end, currnode);
+
+    node->right = solve(inorder, postorder, idx, pos + 1, end);
+    node->left = solve(inorder, postorder, idx, start, pos - 1);
+
+    return node;
+}
+BinaryTreeNode<int> *buildTree(vector<int> &inorder, vector<int> &postorder)
+{
+    int idx = inorder.size() - 1, start = 0, end = inorder.size() - 1;
+    return solve(inorder, postorder, idx, start, end);
+}
 
 // diameter of binary tree
 int diameter(BinaryTreeNode<int> *root)
@@ -495,23 +502,25 @@ void pairSum(BinaryTreeNode<int> *root, int sum)
     sort(v.begin(), v.end());
     ArrPairSum(v, sum);
 }
+
 //  LCA of Binary Tree
-int getLCA(BinaryTreeNode<int> *root, int a, int b)
+BinaryTreeNode<int> *lowestCommonAncestor(BinaryTreeNode<int> *root,
+                                          BinaryTreeNode<int> *p, BinaryTreeNode<int> *q)
 {
-    if (root == NULL)
-        return -1;
-    if (root->data == a || root->data == b)
-        return root->data;
-    int left = getLCA(root->left, a, b);
-    int right = getLCA(root->right, a, b);
-    if (left == -1 && right == -1)
-        return -1;
-    else if (left != -1 && right == -1)
-        return left;
-    else if (left == -1 && right != -1)
+    // base case
+    if (root == NULL || root == p || root == q)
+        return root;
+
+    BinaryTreeNode<int> *left = lowestCommonAncestor(root->left, p, q);
+    BinaryTreeNode<int> *right = lowestCommonAncestor(root->right, p, q);
+
+    // results
+    if (left == NULL)
         return right;
+    else if (right == NULL)
+        return left;
     else
-        return root->data;
+        return root; // we found the result as both are not NULL
 }
 // Path Sum Root to Leaf
 void solve(BinaryTreeNode<int> *root, int k, vector<int> path)
@@ -540,49 +549,58 @@ void rootToLeafPathsSumToK(BinaryTreeNode<int> *root, int k)
     vector<int> path;
     solve(root, k, path);
 }
-// Print nodes at distance k from node
-void printkdistanceNodeDown(BinaryTreeNode<int> *root, int k)
+
+// All Nodes Distance K in Binary Tree
+void markParents(BinaryTreeNode<int> *root, unordered_map<BinaryTreeNode<int> *, BinaryTreeNode<int> *> &parent)
 {
-    if (root == NULL || k < 0)
-        return;
+    queue<BinaryTreeNode<int> *> q;
+    q.push(root);
+    while (!q.empty())
+    {
+        int n = q.size();
+        for (int i = 0; i < n; i++)
+        {
+            BinaryTreeNode<int> *node = q.front();
+            q.pop();
+            if (node->left)
+            {
+                parent[node->left] = node;
+                q.push(node->left);
+            }
+            if (node->right)
+            {
+                parent[node->right] = node;
+                q.push(node->right);
+            }
+        }
+    }
+}
+void solve(BinaryTreeNode<int> *target, unordered_map<BinaryTreeNode<int> *, BinaryTreeNode<int> *> &parent, unordered_map<BinaryTreeNode<int> *, bool> &visited, int k, vector<int> &ans)
+{
     if (k == 0)
-        cout << root->data << endl;
-    printkdistanceNodeDown(root->left, k - 1);
-    printkdistanceNodeDown(root->right, k - 1);
+        ans.push_back(target->data);
+
+    visited[target] = true;
+    if (target->left && !visited[target->left])
+        solve(target->left, parent, visited, k - 1, ans);
+
+    if (target->right && !visited[target->right])
+        solve(target->right, parent, visited, k - 1, ans);
+
+    if (parent[target] != NULL && !visited[parent[target]])
+        solve(parent[target], parent, visited, k - 1, ans);
 }
-int printkdistanceNode(BinaryTreeNode<int> *root, int target, int k)
+vector<int> distanceK(BinaryTreeNode<int> *root, BinaryTreeNode<int> *target, int k)
 {
-    if (root == NULL)
-        return -1;
-    if (root->data == target)
-    {
-        printkdistanceNodeDown(root, k);
-        return 0;
-    }
-    int dl = printkdistanceNode(root->left, target, k);
-    if (dl != -1)
-    {
-        if (dl + 1 == k)
-            cout << root->data << endl;
-        else
-            printkdistanceNodeDown(root->right, k - dl - 2);
-        return 1 + dl;
-    }
-    int dr = printkdistanceNode(root->right, target, k);
-    if (dr != -1)
-    {
-        if (dr + 1 == k)
-            cout << root->data << endl;
-        else
-            printkdistanceNodeDown(root->left, k - dr - 2);
-        return 1 + dr;
-    }
-    return -1;
+    unordered_map<BinaryTreeNode<int> *, BinaryTreeNode<int> *> parent; // node -> parent
+    markParents(root, parent);
+
+    unordered_map<BinaryTreeNode<int> *, bool> visited;
+    vector<int> ans;
+    solve(target, parent, visited, k, ans);
+    return ans;
 }
-void nodesAtDistanceK(BinaryTreeNode<int> *root, int node, int k)
-{
-    int ans = printkdistanceNode(root, node, k);
-}
+
 // Check cousins
 int level(BinaryTreeNode<int> *root, int node, int lev)
 {
@@ -890,6 +908,195 @@ bool checkSymmetric(BinaryTreeNode<int> *left, BinaryTreeNode<int> *right)
 bool isSymmetric(BinaryTreeNode<int> *root)
 {
     return root == NULL || checkSymmetric(root->left, root->right);
+}
+
+// Root to Leaf Paths
+void findpaths(BinaryTreeNode<int> *root, vector<int> &currpath, vector<vector<int>> &allpaths)
+{
+    if (root == NULL)
+        return;
+
+    currpath.push_back(root->data);
+
+    if (root->left == NULL && root->right == NULL)
+        allpaths.push_back(currpath);
+    else
+    {
+        findpaths(root->left, currpath, allpaths);
+        findpaths(root->right, currpath, allpaths);
+    }
+
+    currpath.pop_back();
+}
+vector<vector<int>> Paths(BinaryTreeNode<int> *root)
+{
+    vector<vector<int>> allpaths;
+    vector<int> currpath;
+    findpaths(root, currpath, allpaths);
+    return allpaths;
+}
+
+// Maximum Width of Binary Tree
+int widthOfBinaryTree(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+        return 0;
+
+    int ans = 0;
+
+    queue<pair<BinaryTreeNode<int> *, int>> q;
+    q.push({root, 0});
+
+    while (!q.empty())
+    {
+        int size = q.size();
+        int mmin = q.front().second;
+        int first, last;
+
+        for (int i = 0; i < size; i++)
+        {
+            int cur_id = q.front().second - mmin;
+            BinaryTreeNode<int> *node = q.front().first;
+            q.pop();
+            if (i == 0)
+                first = cur_id;
+            if (i == size - 1)
+                last = cur_id;
+            if (node->left)
+                q.push({node->left, (long long)cur_id * 2 + 1});
+            if (node->right)
+                q.push({node->right, (long long)cur_id * 2 + 2});
+        }
+        ans = max(ans, last - first + 1);
+    }
+    return ans;
+}
+
+// Children Sum in a Binary Tree
+int isSumProperty(BinaryTreeNode<int> *root)
+{
+    // base case
+    if (root == NULL || (root->left == NULL && root->right == NULL))
+        return 1;
+
+    int leftData = (root->left != NULL) ? root->left->data : 0;
+    int rightData = (root->right != NULL) ? root->right->data : 0;
+
+    return root->data == leftData + rightData &&
+           isSumProperty(root->left) &&
+           isSumProperty(root->right);
+}
+
+// Minimum time taken to BURN the Binary Tree from a Node
+BinaryTreeNode<int> *markParents(BinaryTreeNode<int> *root, unordered_map<BinaryTreeNode<int> *, BinaryTreeNode<int> *> &parent, int target)
+{
+    BinaryTreeNode<int> *targetnode;
+    queue<BinaryTreeNode<int> *> q;
+    q.push(root);
+    while (!q.empty())
+    {
+        int n = q.size();
+        for (int i = 0; i < n; i++)
+        {
+            auto *node = q.front();
+            q.pop();
+            if (node->data == target)
+                targetnode = node;
+            if (node->left)
+            {
+                parent[node->left] = node;
+                q.push(node->left);
+            }
+            if (node->right)
+            {
+                parent[node->right] = node;
+                q.push(node->right);
+            }
+        }
+    }
+    return targetnode;
+}
+int findminimum(unordered_map<BinaryTreeNode<int> *, BinaryTreeNode<int> *> parent, BinaryTreeNode<int> *targetnode)
+{
+    queue<BinaryTreeNode<int> *> q;
+    q.push(targetnode);
+    unordered_map<BinaryTreeNode<int> *, bool> visited;
+    visited[targetnode] = true;
+    int mini = 0;
+
+    while (!q.empty())
+    {
+        int sz = q.size();
+        int fl = 0;
+        for (int i = 0; i < sz; i++)
+        {
+            auto node = q.front();
+            q.pop();
+            if (node->left && !visited[node->left])
+            {
+                fl = 1;
+                visited[node->left] = true;
+                q.push(node->left);
+            }
+            if (node->right && !visited[node->right])
+            {
+                fl = 1;
+                visited[node->right] = true;
+                q.push(node->right);
+            }
+            if (parent[node] && !visited[parent[node]])
+            {
+                fl = 1;
+                visited[parent[node]] = true;
+                q.push(parent[node]);
+            }
+        }
+        if (fl)
+            mini++;
+    }
+    return mini;
+}
+int minTime(BinaryTreeNode<int> *root, int target)
+{
+    unordered_map<BinaryTreeNode<int> *, BinaryTreeNode<int> *> parent; // node -> parent
+    BinaryTreeNode<int> *targetnode = markParents(root, parent, target);
+    int mini = findminimum(parent, targetnode);
+    return mini;
+}
+
+// Count Complete Tree Nodes
+int findheightleft(BinaryTreeNode<int> *root)
+{
+    int leftht = 0;
+    while (root)
+    {
+        leftht++;
+        root = root->left;
+    }
+    return leftht;
+}
+int findheightright(BinaryTreeNode<int> *root)
+{
+    int rightht = 0;
+    while (root)
+    {
+        rightht++;
+        root = root->right;
+    }
+    return rightht;
+}
+int countNodes(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+        return 0;
+
+    int lh = findheightleft(root);
+    int rh = findheightright(root);
+
+    if (lh == rh)
+        return (1 << lh) - 1;
+
+    return 1 + countNodes(root->left) + countNodes(root->right);
 }
 
 // 1 2 3 4 5 6 7 -1 -1 -1 -1 8 9 -1 -1 -1 -1 -1 -1

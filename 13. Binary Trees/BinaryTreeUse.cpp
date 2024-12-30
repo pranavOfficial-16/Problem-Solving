@@ -1099,6 +1099,91 @@ int countNodes(BinaryTreeNode<int> *root)
     return 1 + countNodes(root->left) + countNodes(root->right);
 }
 
+// Serialize and Deserialize Binary Tree
+
+// Encodes a tree to a single string.
+// string serialize(TreeNode *root)
+// {
+//     if (root == NULL)
+//         return "";
+
+//     string s;
+//     queue<TreeNode *> q;
+//     q.push(root);
+//     while (!q.empty())
+//     {
+//         TreeNode *currNode = q.front();
+//         q.pop();
+//         if (currNode == NULL)
+//             s += "null,";
+//         else
+//             s += to_string(currNode->val) + ',';
+//         if (currNode != NULL)
+//         {
+//             q.push(currNode->left);
+//             q.push(currNode->right);
+//         }
+//     }
+//     return s;
+// }
+
+// Decodes your encoded data to tree.
+// TreeNode *deserialize(string data)
+// {
+//     if (data.size() == 0)
+//         return NULL;
+//     stringstream s(data);
+//     string str;
+//     getline(s, str, ',');
+//     TreeNode *root = new TreeNode(stoi(str));
+//     queue<TreeNode *> q;
+//     q.push(root);
+//     while (!q.empty())
+//     {
+//         TreeNode *node = q.front();
+//         q.pop();
+
+//         getline(s, str, ',');
+//         if (str == "null")
+//             node->left = NULL;
+//         else
+//         {
+//             TreeNode *leftnode = new TreeNode(stoi(str));
+//             node->left = leftnode;
+//             q.push(leftnode);
+//         }
+
+//         getline(s, str, ',');
+//         if (str == "null")
+//             node->right = NULL;
+//         else
+//         {
+//             TreeNode *rightnode = new TreeNode(stoi(str));
+//             node->right = rightnode;
+//             q.push(rightnode);
+//         }
+//     }
+//     return root;
+// }
+
+// Flatten Binary Tree to Linked List
+// void solve(TreeNode *root, TreeNode *&prev)
+// {
+//     if (root == NULL)
+//         return;
+//     solve(root->right, prev);
+//     solve(root->left, prev);
+
+//     root->right = prev;
+//     root->left = NULL;
+//     prev = root;
+// }
+// void flatten(TreeNode *root)
+// {
+//     TreeNode *prev = NULL;
+//     solve(root, prev);
+// }
+
 // 1 2 3 4 5 6 7 -1 -1 -1 -1 8 9 -1 -1 -1 -1 -1 -1
 int main()
 {

@@ -50,7 +50,7 @@ private:
         if (data > node->data)
             node->right = remove(node->right, data);
         else if (data < node->data)
-            node->left = remove(node->right, data);
+            node->left = remove(node->left, data);
         else
         {
             if (node->left == NULL && node->right == NULL)

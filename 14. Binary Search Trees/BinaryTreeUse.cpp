@@ -218,6 +218,7 @@ Node<int> *constructLinkedList(BinaryTreeNode<int> *root)
     }
     return head;
 }
+
 // Find Path in BST
 vector<int> *getPath(BinaryTreeNode<int> *root, int data)
 {
@@ -247,55 +248,50 @@ vector<int> *getPath(BinaryTreeNode<int> *root, int data)
     else
         return NULL;
 }
+
 // Largest BST
 struct LargestBST
 {
     int minimum;
     int maximum;
     int height;
-    bool check;
+    bool isBST;
 };
+
 LargestBST verify(BinaryTreeNode<int> *root)
 {
     if (root == NULL)
     {
-        LargestBST ob;
-        ob.minimum = INT_MAX;
-        ob.maximum = INT_MIN;
-        ob.height = 0;
-        ob.check = true;
-        return ob;
+        return {INT_MAX, INT_MIN, 0, true};
     }
+
     LargestBST left = verify(root->left);
     LargestBST right = verify(root->right);
-    if (!(left.check && left.maximum < root->data))
-        left.check = false;
-    if (!(right.check && right.minimum > root->data))
-        right.check = false;
-    if (!left.check || !right.check || root->data > right.minimum || root->data < left.maximum)
+
+    if (left.isBST && right.isBST && root->data > left.maximum && root->data < right.minimum)
     {
-        if (left.height > right.height)
-        {
-            left.check = false;
-            return left;
-        }
-        else
-        {
-            right.check = false;
-            return right;
-        }
+        return {
+            min(left.minimum, root->data),
+            max(right.maximum, root->data),
+            left.height + right.height + 1,
+            true};
     }
-    LargestBST ob;
-    ob.check = true;
-    ob.minimum = min(left.minimum, min(root->data, right.minimum));
-    ob.maximum = max(left.maximum, max(root->data, right.maximum));
-    ob.height = max(left.height, right.height) + 1;
-    return ob;
+
+    return {
+        0,
+        0,
+        max(left.height, right.height),
+        false};
 }
-int largestBSTSubtree(BinaryTreeNode<int> *root)
+class Solution
 {
-    return verify(root).height;
-}
+public:
+    int largestBst(BinaryTreeNode<int> *root)
+    {
+        return verify(root).height;
+    }
+};
+
 // Replace with Sum of greater nodes
 int solve(BinaryTreeNode<int> *root, int sum)
 {
@@ -313,12 +309,305 @@ void replaceWithLargerNodesSum(BinaryTreeNode<int> *root)
         return;
     int ans = solve(root, 0);
 }
-// 8 5 10 2 6 -1 -1 -1 -1 -1 7 -1 -1 2
-int main()
+
+// Ceil in BST
+int findCeil(BinaryTreeNode<int> *root, int input)
 {
-    BinaryTreeNode<int> *root = takeInputLevelWise();
-    printLevelWise(root);
-    cout << searchInBST(root, 2) << endl;
-    inorder(root);
-    return 0;
+    int ceil = -1;
+    while (root)
+    {
+
+        if (input == root->data)
+        {
+            ceil = root->data;
+            return ceil;
+        }
+        else if (input > root->data)
+            root = root->right;
+        else
+        {
+            ceil = root->data;
+            root = root->left;
+        }
+    }
+    return ceil;
 }
+
+// Floor in BST
+int floor(BinaryTreeNode<int> *root, int k)
+{
+    int floor = -1;
+    while (root)
+    {
+        if (k == root->data)
+        {
+            floor = root->data;
+            return floor;
+        }
+        else if (k > root->data)
+        {
+            floor = root->data;
+            root = root->right;
+        }
+        else
+            root = root->left;
+    }
+    return floor;
+}
+
+// kth smallest
+int kthSmallest(BinaryTreeNode<int> *root, int k)
+{
+    BinaryTreeNode<int> *current = root;
+    stack<BinaryTreeNode<int> *> stack;
+    int count = 0;
+
+    while (!stack.empty() || current != NULL)
+    {
+        while (current != NULL)
+        {
+            stack.push(current);
+            current = current->left;
+        }
+
+        current = stack.top();
+        stack.pop();
+        count++;
+
+        if (count == k)
+            return current->data;
+        current = current->right;
+    }
+    return -1;
+}
+
+// kth largest
+int kthLargest(BinaryTreeNode<int> *root, int k)
+{
+    stack<BinaryTreeNode<int> *> stack;
+    BinaryTreeNode<int> *current = root;
+    int count = 0;
+
+    while (!stack.empty() || current != NULL)
+    {
+        while (current != NULL)
+        {
+            stack.push(current);
+            current = current->right;
+        }
+
+        current = stack.top();
+        stack.pop();
+
+        count++;
+        if (count == k)
+            return current->data;
+
+        current = current->left;
+    }
+    return -1;
+}
+
+//  LCA of BST
+BinaryTreeNode<int> *lowestCommonAncestor(BinaryTreeNode<int> *root, BinaryTreeNode<int> *p, BinaryTreeNode<int> *q)
+{
+    if (root == NULL || root == p || root == q)
+        return root;
+    if (p->data < root->data && q->data < root->data)
+        return lowestCommonAncestor(root->left, p, q);
+    if (p->data > root->data && q->data > root->data)
+        return lowestCommonAncestor(root->right, p, q);
+    return root;
+}
+
+// Construct Binary Search Tree from Preorder Traversal
+BinaryTreeNode<int> *solve(vector<int> &preorder, int &index, int lb, int ub)
+{
+    if (index >= preorder.size() || preorder[index] < lb || preorder[index] > ub)
+        return NULL;
+
+    int value = preorder[index++];
+    BinaryTreeNode<int> *root = new BinaryTreeNode<int>(value);
+
+    root->left = solve(preorder, index, lb, value);
+    root->right = solve(preorder, index, value, ub);
+    return root;
+}
+BinaryTreeNode<int> *bstFromPreorder(vector<int> &preorder)
+{
+    int index = 0;
+    return solve(preorder, index, INT_MIN, INT_MAX);
+}
+
+// Inorder Successor in BST
+BinaryTreeNode<int> *inorderSuccessor(BinaryTreeNode<int> *root, BinaryTreeNode<int> *p)
+{
+
+    BinaryTreeNode<int> *successor = NULL;
+    while (root != NULL)
+    {
+        if (root->data <= p->data)
+            root = root->right;
+        else
+        {
+            successor = root;
+            root = root->left;
+        }
+    }
+    return successor;
+}
+
+// Inorder Predecessor in BST
+BinaryTreeNode<int> *inorderPredecessor(BinaryTreeNode<int> *root, BinaryTreeNode<int> *p)
+{
+
+    BinaryTreeNode<int> *predecessor = NULL;
+    while (root != NULL)
+    {
+        if (root->data >= p->data)
+            root = root->left;
+        else
+        {
+            predecessor = root;
+            root = root->right;
+        }
+    }
+    return predecessor;
+}
+
+// Binary Search Tree Iterator
+class BSTIterator
+{
+public:
+    stack<BinaryTreeNode<int> *> myStack;
+    void pushAll(BinaryTreeNode<int> *root)
+    {
+        while (root != NULL)
+        {
+            myStack.push(root);
+            root = root->left;
+        }
+    }
+
+    BSTIterator(BinaryTreeNode<int> *root)
+    {
+        pushAll(root);
+    }
+
+    int next()
+    {
+        BinaryTreeNode<int> *temp = myStack.top();
+        myStack.pop();
+        pushAll(temp->right);
+        return temp->data;
+    }
+
+    bool hasNext()
+    {
+        return !myStack.empty();
+    }
+};
+
+// Two Sum In BST
+class BSTIterator
+{
+public:
+    stack<BinaryTreeNode<int> *> myStack;
+    bool reverse = true; // true->before, false->next
+    void pushAll(BinaryTreeNode<int> *root)
+    {
+        while (root != NULL)
+        {
+            myStack.push(root);
+            if (reverse == true)
+                root = root->right;
+            else
+                root = root->left;
+        }
+    }
+
+    BSTIterator(BinaryTreeNode<int> *root, bool isReverse)
+    {
+        reverse = isReverse;
+        pushAll(root);
+    }
+
+    int next()
+    {
+        BinaryTreeNode<int> *temp = myStack.top();
+        myStack.pop();
+        if (!reverse)
+            pushAll(temp->right);
+        else
+            pushAll(temp->left);
+        return temp->data;
+    }
+
+    bool hasNext()
+    {
+        return !myStack.empty();
+    }
+};
+class Solution
+{
+public:
+    bool findTarget(BinaryTreeNode<int> *root, int k)
+    {
+        if (root == NULL)
+            return false;
+        BSTIterator l(root, false);
+        BSTIterator r(root, true);
+
+        int i = l.next();
+        int j = r.next();
+        while (i < j)
+        {
+            if (i + j == k)
+                return true;
+            else if (i + j < k)
+                i = l.next();
+            else
+                j = r.next();
+        }
+        return false;
+    }
+};
+
+// Recover Binary Search Tree
+class Solution
+{
+public:
+    BinaryTreeNode<int> *first = nullptr;
+    BinaryTreeNode<int> *second = nullptr;
+    BinaryTreeNode<int> *prev = nullptr;
+
+    void inorder(BinaryTreeNode<int> *root)
+    {
+        if (!root)
+            return;
+
+        inorder(root->left);
+
+        if (prev && root->data < prev->data)
+        {
+            if (!first)
+            {
+                first = prev;
+            }
+            second = root;
+        }
+        prev = root;
+
+        inorder(root->right);
+    }
+
+    void recoverTree(BinaryTreeNode<int> *root)
+    {
+        inorder(root);
+
+        if (first && second)
+        {
+            swap(first->data, second->data);
+        }
+    }
+};
